@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>字符串String和StringBuilder</title>
+      <link href="/blog/2024/04/17/%E5%AD%97%E7%AC%A6%E4%B8%B2String%E5%92%8CStringBuilder/"/>
+      <url>/blog/2024/04/17/%E5%AD%97%E7%AC%A6%E4%B8%B2String%E5%92%8CStringBuilder/</url>
+      
+        <content type="html"><![CDATA[<h1 id="字符串类型和stringbuilder类"><a href="#字符串类型和stringbuilder类" class="headerlink" title="字符串类型和stringbuilder类"></a>字符串类型和stringbuilder类</h1><h2 id="字符串类"><a href="#字符串类" class="headerlink" title="字符串类"></a>字符串类</h2><h3 id="String类，即字符串，java中所有字符串皆为该类对象"><a href="#String类，即字符串，java中所有字符串皆为该类对象" class="headerlink" title="String类，即字符串，java中所有字符串皆为该类对象"></a>String类，即字符串，java中所有字符串皆为该类对象</h3><ul><li>String类固定用final修饰，<em>创建后不可更改</em>！！而字符串缓冲区（StringBuffer）支持可变字符串</li><li>！！由于String类对象都为final所以可被共享，即通过new申请内存空间后，只要字符序列（顺序和大小写）相同，无论再程序不同位置出现几次，jvm都<strong>只会建立一个String对象</strong><br> 创建空字符串：String snull&#x3D;new String();<br> 参数为字符串的构造方法：String str&#x3D;new String(“value”);</li></ul><h3 id="String类常用方法"><a href="#String类常用方法" class="headerlink" title="String类常用方法"></a>String类常用方法</h3><ul><li>char charAt(int index)返回索引位置字符</li><li>int length()返回字符串长度（<em>字符个数</em>）</li><li>int indexOf(string)返回指定子字符串<strong>第一次</strong>出现位置,<em>不存在返回-1</em></li><li>String concat（String str）将str连接到字符串<strong>结尾</strong></li><li>int compareTo(Object obj）<strong>重要！！以字典序进行比较，大于返回1，等于返回0，小于返回-1</strong></li><li>char[] toCharArray()转化为字符串数组，便于操作，<strong>常用</strong></li></ul><hr><h2 id="StringBuilder字符串构造器"><a href="#StringBuilder字符串构造器" class="headerlink" title="StringBuilder字符串构造器"></a>StringBuilder字符串构造器</h2><ul><li>常用构造方法为无参构造：StringBuilder sb&#x3D;new StringBuilder()</li><li>char charAt(int index)返回索引位置字符</li><li>int indexOf(string)返回指定子字符串第一次出现位置,不存在返回-1</li><li><strong>重点</strong>reveserse!!—StringBuilder reverse()<strong>返回顺序反转的StringBuilder对象</strong></li><li>boolen isEmpty()判断字符串是否为空</li><li>void append(Object obj)在末尾添加字符串</li><li>insert(int index, String x)在索引位置<strong>前面</strong>添加字符<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">Scanner scan = new Scanner(System.in);</span><br><span class="line">String snull=new String();//创建空字符串</span><br><span class="line">String str=new String(&quot;value&quot;);</span><br><span class="line">System.err.println(str.charAt(0));</span><br><span class="line">System.err.println(str.indexOf(&quot;al&quot;));</span><br><span class="line">str.toCharArray();</span><br><span class="line">StringBuilder sb=new StringBuilder();</span><br><span class="line">sb.append(&quot;wc&quot;);</span><br><span class="line">sb.insert(1, &quot;NB&quot;);//添加到索引位置前面</span><br><span class="line">System.out.println(sb.reverse());</span><br><span class="line">scan.close();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><img src="https://bu.dusays.com/2024/04/17/661f4d11d5771.jpg" alt="84963288_p0_master1200.jpg"></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java算法 </tag>
+            
+            <tag> 数据结构 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>快速幂</title>
+      <link href="/blog/2024/04/16/%E5%BF%AB%E9%80%9F%E5%B9%82/"/>
+      <url>/blog/2024/04/16/%E5%BF%AB%E9%80%9F%E5%B9%82/</url>
+      
+        <content type="html"><![CDATA[<h1 id="快速幂算法"><a href="#快速幂算法" class="headerlink" title="快速幂算法"></a>快速幂算法</h1><ul><li>利用对幂次做<strong>加法分解</strong>，再相乘,得到o(long(n))的求幂算法</li><li>快速幂算法，输入参数为a^n</li><li><strong>返回值ans初始化为1</strong></li><li>while n不为0</li><li>（if）若每次循环n转化为<strong>二进制形式末尾为1</strong></li><li>ans*&#x3D;a</li><li><strong>每次循环</strong></li><li>a*&#x3D;a</li><li>二进制n后<strong>右</strong>移一位,即除2<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Scanner;</span><br><span class="line">public class 快速幂算法 &#123;</span><br><span class="line"> static long qmi(long a,long b)&#123;</span><br><span class="line">    long res = 1;</span><br><span class="line">    while(b&gt;0)&#123;</span><br><span class="line">      if((b&amp;1)&gt;0)&#123;</span><br><span class="line">        res = (res*a);</span><br><span class="line">      &#125;</span><br><span class="line">      a = (a*a);</span><br><span class="line">      b&gt;&gt;=1;</span><br><span class="line">    &#125;</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br><span class="line">/*利用对幂次做加法分解，再相乘,得到o(long(n))的求幂算法*/</span><br><span class="line">public static int ksm(int a,int n) &#123;//快速幂算法，参数表示a^n</span><br><span class="line">int ans=1;</span><br><span class="line">while(n&gt;0) &#123;</span><br><span class="line">if ((n&amp;1)==1) &#123;//若此时的n转化为二进制后末尾为1</span><br><span class="line">ans*=a;//数据过大时，可在此处取模</span><br><span class="line">&#125;</span><br><span class="line">a*=a;//数据过大时，可在此处取模</span><br><span class="line">n&gt;&gt;=1;//转化为二进制后右移一位</span><br><span class="line">&#125;</span><br><span class="line">return ans;</span><br><span class="line">&#125;</span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">Scanner in=new Scanner(System.in);</span><br><span class="line">int a=in.nextInt();int b=in.nextInt();</span><br><span class="line">System.out.println(ksm(a, b));</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><img src="https://bu.dusays.com/2024/04/16/661e65a26928b.jpg" alt="117028284_p0_master1200.jpg"></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java算法 </tag>
+            
+            <tag> 基础算法 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>set集合</title>
+      <link href="/blog/2024/04/15/set%E9%9B%86%E5%90%88/"/>
+      <url>/blog/2024/04/15/set%E9%9B%86%E5%90%88/</url>
+      
+        <content type="html"><![CDATA[<h1 id="hashset类常用方法"><a href="#hashset类常用方法" class="headerlink" title="hashset类常用方法"></a>hashset类常用方法</h1><ul><li>add(Object obj)<strong>向集合中添加元素</strong>，添加成返回true，失败（集合中已有该元素）返回false</li><li>size()<strong>返回集合中元素个数</strong></li><li>remove（Object obj）<strong>删除set集合元素</strong>，成功返回true，失败返回false</li><li>contains(Object obj)<strong>查询集合中的元素</strong>，若set包含元素，返回true，否则返回false</li><li>clear()<strong>清除集合中所有元素</strong></li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import java.util.HashSet;</span><br><span class="line">import java.util.Scanner;</span><br><span class="line">import java.util.Set;</span><br><span class="line">public class ___set集合 &#123;</span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">Scanner scan= new Scanner(System.<span class="keyword">in</span>);</span><br><span class="line">boolean flag=<span class="literal">false</span>;</span><br><span class="line">Set&lt;Integer&gt; hset=new HashSet&lt;&gt;();</span><br><span class="line">flag=hset.add(1);</span><br><span class="line">System.out.println(flag);//add成功，返回<span class="literal">true</span></span><br><span class="line">flag=hset.add(1);</span><br><span class="line">System.out.println(flag);//add失败，返回<span class="literal">false</span></span><br><span class="line">scan.close();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><p><img src="https://bu.dusays.com/2024/04/15/661d12d7e535d.jpg" alt="132876675863952039.jpg"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java算法 </tag>
+            
+            <tag> 数据结构 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>二分法</title>
+      <link href="/blog/2024/04/15/%E6%B5%8B%E8%AF%95%E5%8F%91%E5%B8%83%E5%8D%9A%E6%96%87%E4%B8%8E%E6%A0%87%E7%AD%BE/"/>
+      <url>/blog/2024/04/15/%E6%B5%8B%E8%AF%95%E5%8F%91%E5%B8%83%E5%8D%9A%E6%96%87%E4%B8%8E%E6%A0%87%E7%AD%BE/</url>
+      
+        <content type="html"><![CDATA[<h1 id="二分法"><a href="#二分法" class="headerlink" title="二分法"></a>二分法</h1><h2 id="二分搜索算法"><a href="#二分搜索算法" class="headerlink" title="二分搜索算法"></a>二分搜索算法</h2><ul><li>用于在有序集合中查找元素，时间复杂度为ologN</li><li>二分具有二段性：给定条件可以将集合中元素分为两部分，一部分满足条件，一部分不满足条件</li></ul><hr><h1 id="步骤！！！！！！！！"><a href="#步骤！！！！！！！！" class="headerlink" title="步骤！！！！！！！！"></a>步骤！！！！！！！！</h1><ul><li>首先将（有序）集合分成两段，<strong>左边段</strong>[left,n-1]<strong>右边段</strong>[n,right]</li><li>若mid落在左半段（&lt;n）left&#x3D;mid</li><li>若mid落在右半段（&gt;&#x3D;n）right&#x3D;mid</li><li>然后else中left向右移动（加1），right向左移动（减1）</li><li>若出现left&#x3D;mid,计算mid要向上取整（加1）</li><li>勤加练习，必能掌握</li></ul><h3 id="java实现"><a href="#java实现" class="headerlink" title="java实现"></a>java实现</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">int arr[]=new int[]&#123;1,2,3,4,5,6&#125;;</span><br><span class="line">int left=0,right=5;</span><br><span class="line">int left1=0,right1=5;</span><br><span class="line">int k=3;//要查找的值</span><br><span class="line"><span class="keyword">while</span>(left&lt;right) &#123;//查找上界</span><br><span class="line">int mid=(left+right)&gt;&gt;1;</span><br><span class="line"><span class="keyword">if</span>(arr[mid]&gt;=k) &#123;//界限可变</span><br><span class="line">right=mid;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">left=mid+1;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">while</span>(left1&lt;right1) &#123;//查找下界</span><br><span class="line">int mid=(left1+right1+1)&gt;&gt;1;</span><br><span class="line"><span class="keyword">if</span>(arr[mid]&lt;k) &#123;</span><br><span class="line">left1=mid;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">right1=mid-1;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(left+<span class="string">&quot; &quot;</span>+left1);</span><br></pre></td></tr></table></figure><p><img src="https://bu.dusays.com/2024/04/15/661d12d7e535d.jpg" alt="132876675863952039.jpg"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java算法 </tag>
+            
+            <tag> 基础算法 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/blog/2024/04/14/hello-world/"/>
+      <url>/blog/2024/04/14/hello-world/</url>
+      
+        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="创建新文章"><a href="#创建新文章" class="headerlink" title="创建新文章"></a>创建新文章</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>详情: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="启动本地服务器"><a href="#启动本地服务器" class="headerlink" title="启动本地服务器"></a>启动本地服务器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>详情: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="生成静态文件"><a href="#生成静态文件" class="headerlink" title="生成静态文件"></a>生成静态文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>详情: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="远程服务器部署"><a href="#远程服务器部署" class="headerlink" title="远程服务器部署"></a>远程服务器部署</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>详情: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a><br><img src="https://bu.dusays.com/2024/04/15/661d185a37e59.jpg" alt="v2-cadb722c283c20b1a24f56581995d1f9_r.jpg"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 博客入门 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
