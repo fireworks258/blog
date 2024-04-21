@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>dosbox基础指令</title>
+      <link href="/2024/04/19/dosbox%E5%9F%BA%E7%A1%80%E6%8C%87%E4%BB%A4/"/>
+      <url>/2024/04/19/dosbox%E5%9F%BA%E7%A1%80%E6%8C%87%E4%BB%A4/</url>
+      
+        <content type="html"><![CDATA[<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>将 e:\tc20 虚拟为DOSBOX仿真环境的C盘</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount c e:\tc20</span><br></pre></td></tr></table></figure><p>进入C盘（即 e:\tc20 ）</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c:</span><br></pre></td></tr></table></figure><p><img src="https://bu.dusays.com/2024/04/19/662291d0be24f.png" alt="20210204222449925.png"><br>仿真执行DOS系统的各种操作</p><h4 id="进入调试模式"><a href="#进入调试模式" class="headerlink" title="进入调试模式"></a>进入调试模式</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">debug</span><br></pre></td></tr></table></figure><h4 id="写入指令"><a href="#写入指令" class="headerlink" title="写入指令"></a>写入指令</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a</span><br></pre></td></tr></table></figure><h4 id="查看寄存器内容"><a href="#查看寄存器内容" class="headerlink" title="查看寄存器内容"></a>查看寄存器内容</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r</span><br></pre></td></tr></table></figure><p><img src="https://bu.dusays.com/2024/04/19/662291d0bf380.png" alt="20210204223027116.png"></p><h4 id="查看内存内容"><a href="#查看内存内容" class="headerlink" title="查看内存内容"></a>查看内存内容</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d</span><br></pre></td></tr></table></figure><p><img src="https://bu.dusays.com/2024/04/19/662291d0c8c3a.png" alt="20210204223301277.png"></p><h4 id="查看指令栈-将机器指令翻译成汇编指令"><a href="#查看指令栈-将机器指令翻译成汇编指令" class="headerlink" title="查看指令栈(将机器指令翻译成汇编指令)"></a>查看指令栈(将机器指令翻译成汇编指令)</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">u</span><br></pre></td></tr></table></figure><p><img src="https://bu.dusays.com/2024/04/19/662291d0bedbf.png" alt="20210204223934420.png"></p><h4 id="执行（ip指向位置）指令"><a href="#执行（ip指向位置）指令" class="headerlink" title="执行（ip指向位置）指令"></a>执行（ip指向位置）指令</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t</span><br></pre></td></tr></table></figure><p><img src="https://bu.dusays.com/2024/04/19/662291d0db966.png" alt="20210204224055955.png"></p><h4 id="顺序运行到程序结束"><a href="#顺序运行到程序结束" class="headerlink" title="顺序运行到程序结束"></a>顺序运行到程序结束</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p</span><br></pre></td></tr></table></figure><h4 id="退出"><a href="#退出" class="headerlink" title="退出"></a>退出</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">q</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 大学 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 汇编 </tag>
+            
+            <tag> dosbox </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>DFS</title>
       <link href="/2024/04/18/dfs/"/>
       <url>/2024/04/18/dfs/</url>
