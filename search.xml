@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>并查集</title>
+      <link href="/2024/04/21/%E5%B9%B6%E6%9F%A5%E9%9B%86/"/>
+      <url>/2024/04/21/%E5%B9%B6%E6%9F%A5%E9%9B%86/</url>
+      
+        <content type="html"><![CDATA[<h1 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h1><h2 id="算法适用"><a href="#算法适用" class="headerlink" title="算法适用"></a>算法适用</h2><p>给定一些操作，查找联通块&#x2F;查找集合数&#x2F;查找环的个数</p><h2 id="节点初始化"><a href="#节点初始化" class="headerlink" title="节点初始化"></a>节点初始化</h2><pre><code>创建一维数组，大小为n+1，数组索引代表节点名，数组值代表指向节点</code></pre><h2 id="查找父节点"><a href="#查找父节点" class="headerlink" title="查找父节点"></a>查找父节点</h2><pre><code>若当前节点指向自身，为根节点，找到并返回否则，顺着指向的节点（数组索引位置的值）继续寻找</code></pre><h2 id="链接节点，合并集合"><a href="#链接节点，合并集合" class="headerlink" title="链接节点，合并集合"></a>链接节点，合并集合</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int a_value=find(a);</span><br><span class="line">int b_value=find(b);</span><br><span class="line">num[a_value]=b_value;</span><br></pre></td></tr></table></figure><pre><code>若根节点相同，可以不连接</code></pre><p>同时，<mark class="hl-label blue">若根节点相同，说明图中出现了环</mark> </p><h2 id="路径压缩"><a href="#路径压缩" class="headerlink" title="路径压缩"></a>路径压缩</h2><p>本质是存储搜索的结果</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public int find(int a) &#123;</span><br><span class="line">if (num[a]==a) return a;</span><br><span class="line">else &#123;</span><br><span class="line">num[a]=find(num[a]);//路径压缩</span><br><span class="line">return num[a];</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="返回集合个数"><a href="#返回集合个数" class="headerlink" title="返回集合个数"></a>返回集合个数</h2><pre><code>指向自身的节点为一个集合的父节点，统计数组值等于自身的节点个数</code></pre><h2 id="应用实例"><a href="#应用实例" class="headerlink" title="应用实例"></a>应用实例</h2><p>经典并查集题目<a href="https://www.lanqiao.cn/problems/110/learning/?page=1&first_category_id=1&problem_id=110">合根植物</a><br>一道搜索题，也可以用并查集来解<a href="https://www.luogu.com.cn/problem/P1451">细胞数量</a><br>使用面向对象的形式封装好</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">import java.util.*;</span><br><span class="line">public class 手搓并查集 &#123;</span><br><span class="line">public static class bcj&#123;</span><br><span class="line">static int num[];</span><br><span class="line">public bcj(int n) &#123;//参数是并查集的大小</span><br><span class="line">// TODO 自动生成的构造函数存根</span><br><span class="line"> num=new int[n+1];</span><br><span class="line"> <span class="keyword">for</span> (int i = 1; i &lt;=n; i++) &#123;</span><br><span class="line">num[i]=i;//初始化 所有的节点祖先指向自身</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public int find(int a) &#123;</span><br><span class="line"><span class="keyword">if</span> (num[a]==a) <span class="built_in">return</span> a;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">num[a]=find(num[a]);//路径压缩,find函数的参数一定要填数组的值，一层一层找上去，否则无限循环</span><br><span class="line"><span class="built_in">return</span> num[a];</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">public void add(int a,int b) &#123;//链接节点</span><br><span class="line">int a_value=find(a);</span><br><span class="line">int b_value=find(b);</span><br><span class="line">num[a_value]=b_value;//次序不重要</span><br><span class="line">&#125;</span><br><span class="line">public int <span class="function"><span class="title">sumnode</span></span>() &#123;</span><br><span class="line">int ans=0;</span><br><span class="line"><span class="keyword">for</span> (int i = 1; i &lt; num.length; i++) &#123;</span><br><span class="line"><span class="keyword">if</span>(num[i]==i) ans++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">Scanner scan=new Scanner(System.<span class="keyword">in</span>);</span><br><span class="line">bcj a=new bcj(scan.nextInt()*scan.nextInt());</span><br><span class="line">int N=scan.nextInt();</span><br><span class="line"><span class="keyword">for</span> (int i = 0; i &lt; N; i++) &#123;</span><br><span class="line">a.add(scan.nextInt(), scan.nextInt());</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(a.sumnode());</span><br><span class="line">scan.close();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java算法 </tag>
+            
+            <tag> 基础算法 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>dosbox基础指令</title>
       <link href="/2024/04/19/dosbox%E5%9F%BA%E7%A1%80%E6%8C%87%E4%BB%A4/"/>
       <url>/2024/04/19/dosbox%E5%9F%BA%E7%A1%80%E6%8C%87%E4%BB%A4/</url>
@@ -112,33 +139,6 @@
     
     
     <entry>
-      <title>set集合</title>
-      <link href="/2024/04/15/set%E9%9B%86%E5%90%88/"/>
-      <url>/2024/04/15/set%E9%9B%86%E5%90%88/</url>
-      
-        <content type="html"><![CDATA[<h1 id="hashset类常用方法"><a href="#hashset类常用方法" class="headerlink" title="hashset类常用方法"></a>hashset类常用方法</h1><ul><li>add(Object obj)<strong>向集合中添加元素</strong>，添加成返回true，失败（集合中已有该元素）返回false</li><li>size()<strong>返回集合中元素个数</strong></li><li>remove（Object obj）<strong>删除set集合元素</strong>，成功返回true，失败返回false</li><li>contains(Object obj)<strong>查询集合中的元素</strong>，若set包含元素，返回true，否则返回false</li><li>clear()<strong>清除集合中所有元素</strong></li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import java.util.HashSet;</span><br><span class="line">import java.util.Scanner;</span><br><span class="line">import java.util.Set;</span><br><span class="line">public class ___set集合 &#123;</span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">Scanner scan= new Scanner(System.<span class="keyword">in</span>);</span><br><span class="line">boolean flag=<span class="literal">false</span>;</span><br><span class="line">Set&lt;Integer&gt; hset=new HashSet&lt;&gt;();</span><br><span class="line">flag=hset.add(1);</span><br><span class="line">System.out.println(flag);//add成功，返回<span class="literal">true</span></span><br><span class="line">flag=hset.add(1);</span><br><span class="line">System.out.println(flag);//add失败，返回<span class="literal">false</span></span><br><span class="line">scan.close();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><p><img src="https://bu.dusays.com/2024/04/15/661d12d7e535d.jpg" alt="132876675863952039.jpg"></p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 算法 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Java算法 </tag>
-            
-            <tag> 数据结构 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>二分法</title>
       <link href="/2024/04/15/%E4%BA%8C%E5%88%86/"/>
       <url>/2024/04/15/%E4%BA%8C%E5%88%86/</url>
@@ -158,6 +158,33 @@
             <tag> Java算法 </tag>
             
             <tag> 基础算法 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>set集合</title>
+      <link href="/2024/04/15/set%E9%9B%86%E5%90%88/"/>
+      <url>/2024/04/15/set%E9%9B%86%E5%90%88/</url>
+      
+        <content type="html"><![CDATA[<h1 id="hashset类常用方法"><a href="#hashset类常用方法" class="headerlink" title="hashset类常用方法"></a>hashset类常用方法</h1><ul><li>add(Object obj)<strong>向集合中添加元素</strong>，添加成返回true，失败（集合中已有该元素）返回false</li><li>size()<strong>返回集合中元素个数</strong></li><li>remove（Object obj）<strong>删除set集合元素</strong>，成功返回true，失败返回false</li><li>contains(Object obj)<strong>查询集合中的元素</strong>，若set包含元素，返回true，否则返回false</li><li>clear()<strong>清除集合中所有元素</strong></li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import java.util.HashSet;</span><br><span class="line">import java.util.Scanner;</span><br><span class="line">import java.util.Set;</span><br><span class="line">public class ___set集合 &#123;</span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">Scanner scan= new Scanner(System.<span class="keyword">in</span>);</span><br><span class="line">boolean flag=<span class="literal">false</span>;</span><br><span class="line">Set&lt;Integer&gt; hset=new HashSet&lt;&gt;();</span><br><span class="line">flag=hset.add(1);</span><br><span class="line">System.out.println(flag);//add成功，返回<span class="literal">true</span></span><br><span class="line">flag=hset.add(1);</span><br><span class="line">System.out.println(flag);//add失败，返回<span class="literal">false</span></span><br><span class="line">scan.close();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><p><img src="https://bu.dusays.com/2024/04/15/661d12d7e535d.jpg" alt="132876675863952039.jpg"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java算法 </tag>
+            
+            <tag> 数据结构 </tag>
             
         </tags>
       
