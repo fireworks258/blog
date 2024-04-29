@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>8086总线操作</title>
+      <link href="/2024/04/28/8086%E5%BE%AE%E5%A4%84%E7%90%86%E5%99%A8/"/>
+      <url>/2024/04/28/8086%E5%BE%AE%E5%A4%84%E7%90%86%E5%99%A8/</url>
+      
+        <content type="html"><![CDATA[<pre><code>本博客将随近期学校课程不断更新</code></pre><h2 id="引脚及芯片功能"><a href="#引脚及芯片功能" class="headerlink" title="引脚及芯片功能"></a>引脚及芯片功能</h2><p><img src="https://bu.dusays.com/2024/04/29/662f6e90b963f.png" alt="64003b86e138edc411c36cf3b2e40d6e.png"><br>以下功能遵循图片顺序介绍，自上至下，从左至右</p><ul><li>8284A 晶振，时钟信号发生器</li><li>CLK 时钟信号，控制总线周期</li><li>RESET 冷启动引脚</li><li>ALE 地址锁存允许信号</li><li>A19-A16 地址，状态复用引脚</li><li>AD15-AD0 地址，数据复用信号</li><li>CPU 由 Intel于1978年 开发的 <strong>16</strong> 位微处理器 </li><li>DEN’ 数据允许信号，控制数据收发器，低电平有效，详见数据收发器</li><li>M&#x2F;IO’ 存储器输入&#x2F;IO控制信号，<strong>高</strong>电平表示CPU和存储器进行数据传输，<strong>低</strong>电平表示CPU和IO端口进行数据传输</li><li>WR’ 写信号，低电平有效，具体写到哪里由M&#x2F;IO’决定</li><li>RD’ 读信号，低电平有效，具体读到哪里由M&#x2F;IO’决定</li><li>INTR 中断请求</li><li>INTA’中断应答</li><li>8286 地址锁存器，STB高电平IN,OUT直通，低电平地址信息<strong>锁存</strong>，不被IN改变</li><li>数据收发器 小型设备可省略，AD可直连到内存储器，OE’是使能段</li><li>内存储器，存储规则为十六位段基址(CS代码段,DS数据段,ES附加段,SS堆栈段)+四位偏移值(<strong>常以16进制给出</strong>) 如：DS&#x3D;0703H,偏移值[0003],内存地址物理表示为：07033H （5位16进制，<strong>总共20位2进制</strong>）</li><li>CS’是否使用内存储器</li><li>IO接口芯片 连接外部设备(键盘，屏幕等)</li></ul><p><img src="https://bu.dusays.com/2024/04/29/662f781787abd.png" alt="1d2309aa163c40e2a770d8b43e5a8626.png"></p><h2 id="总线周期"><a href="#总线周期" class="headerlink" title="总线周期"></a>总线周期</h2><p><img src="https://bu.dusays.com/2024/04/29/662f6e874db48.png" alt="20210412120620260.png"></p><ul><li>T1周期 将地址通过AD，A传入地址锁存器</li><li>T2周期 地址发送结束，AD发送数据</li><li>T3周期 cpu发送信号将数据写入内存储器</li><li>T4周期 空挡，信号复原</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 大学 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 汇编 </tag>
+            
+            <tag> 微机原理 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>前缀和</title>
       <link href="/2024/04/27/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
       <url>/2024/04/27/%E5%89%8D%E7%BC%80%E5%92%8C/</url>
@@ -193,33 +220,6 @@
     
     
     <entry>
-      <title>set集合</title>
-      <link href="/2024/04/15/set%E9%9B%86%E5%90%88/"/>
-      <url>/2024/04/15/set%E9%9B%86%E5%90%88/</url>
-      
-        <content type="html"><![CDATA[<h1 id="hashset类常用方法"><a href="#hashset类常用方法" class="headerlink" title="hashset类常用方法"></a>hashset类常用方法</h1><ul><li>add(Object obj)<strong>向集合中添加元素</strong>，添加成返回true，失败（集合中已有该元素）返回false</li><li>size()<strong>返回集合中元素个数</strong></li><li>remove（Object obj）<strong>删除set集合元素</strong>，成功返回true，失败返回false</li><li>contains(Object obj)<strong>查询集合中的元素</strong>，若set包含元素，返回true，否则返回false</li><li>clear()<strong>清除集合中所有元素</strong></li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.HashSet;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">___set</span>集合 &#123;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">Scanner scan= <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line"><span class="type">boolean</span> flag=<span class="literal">false</span>;</span><br><span class="line">Set&lt;Integer&gt; hset=<span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line">flag=hset.add(<span class="number">1</span>);</span><br><span class="line">System.out.println(flag);<span class="comment">//add成功，返回true</span></span><br><span class="line">flag=hset.add(<span class="number">1</span>);</span><br><span class="line">System.out.println(flag);<span class="comment">//add失败，返回false</span></span><br><span class="line">scan.close();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-      
-      
-      <categories>
-          
-          <category> 算法 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Java算法 </tag>
-            
-            <tag> 数据结构 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>二分法</title>
       <link href="/2024/04/15/%E4%BA%8C%E5%88%86/"/>
       <url>/2024/04/15/%E4%BA%8C%E5%88%86/</url>
@@ -239,6 +239,33 @@
             <tag> Java算法 </tag>
             
             <tag> 基础算法 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>set集合</title>
+      <link href="/2024/04/15/set%E9%9B%86%E5%90%88/"/>
+      <url>/2024/04/15/set%E9%9B%86%E5%90%88/</url>
+      
+        <content type="html"><![CDATA[<h1 id="hashset类常用方法"><a href="#hashset类常用方法" class="headerlink" title="hashset类常用方法"></a>hashset类常用方法</h1><ul><li>add(Object obj)<strong>向集合中添加元素</strong>，添加成返回true，失败（集合中已有该元素）返回false</li><li>size()<strong>返回集合中元素个数</strong></li><li>remove（Object obj）<strong>删除set集合元素</strong>，成功返回true，失败返回false</li><li>contains(Object obj)<strong>查询集合中的元素</strong>，若set包含元素，返回true，否则返回false</li><li>clear()<strong>清除集合中所有元素</strong></li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.HashSet;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">___set</span>集合 &#123;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">Scanner scan= <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line"><span class="type">boolean</span> flag=<span class="literal">false</span>;</span><br><span class="line">Set&lt;Integer&gt; hset=<span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line">flag=hset.add(<span class="number">1</span>);</span><br><span class="line">System.out.println(flag);<span class="comment">//add成功，返回true</span></span><br><span class="line">flag=hset.add(<span class="number">1</span>);</span><br><span class="line">System.out.println(flag);<span class="comment">//add失败，返回false</span></span><br><span class="line">scan.close();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java算法 </tag>
+            
+            <tag> 数据结构 </tag>
             
         </tags>
       
