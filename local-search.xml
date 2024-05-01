@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>8086总线操作</title>
+    <link href="/2024/04/28/8086%E5%BE%AE%E5%A4%84%E7%90%86%E5%99%A8/"/>
+    <url>/2024/04/28/8086%E5%BE%AE%E5%A4%84%E7%90%86%E5%99%A8/</url>
+    
+    <content type="html"><![CDATA[<pre><code class="hljs">本博客将随近期学校课程不断更新</code></pre><h2 id="引脚及芯片功能"><a href="#引脚及芯片功能" class="headerlink" title="引脚及芯片功能"></a>引脚及芯片功能</h2><p><img src="https://bu.dusays.com/2024/04/29/662f6e90b963f.png" alt="64003b86e138edc411c36cf3b2e40d6e.png"><br>以下功能遵循图片顺序介绍，自上至下，从左至右</p><ul><li>8284A 晶振，时钟信号发生器</li><li>CLK 时钟信号，控制总线周期</li><li>RESET 冷启动引脚</li><li>ALE 地址锁存允许信号</li><li>A19-A16 地址，状态复用引脚</li><li>AD15-AD0 地址，数据复用信号</li><li>CPU 由 Intel于1978年 开发的 <strong>16</strong> 位微处理器 </li><li>DEN’ 数据允许信号，控制数据收发器，低电平有效，详见数据收发器</li><li>M&#x2F;IO’ 存储器输入&#x2F;IO控制信号，<strong>高</strong>电平表示CPU和存储器进行数据传输，<strong>低</strong>电平表示CPU和IO端口进行数据传输</li><li>WR’ 写信号，低电平有效，具体写到哪里由M&#x2F;IO’决定</li><li>RD’ 读信号，低电平有效，具体读到哪里由M&#x2F;IO’决定</li><li>INTR 中断请求</li><li>INTA’中断应答</li><li>8286 地址锁存器，STB高电平IN,OUT直通，低电平地址信息<strong>锁存</strong>，不被IN改变</li><li>数据收发器 小型设备可省略，AD可直连到内存储器，OE’是使能段</li><li>内存储器，存储规则为十六位段基址(CS代码段,DS数据段,ES附加段,SS堆栈段)+四位偏移值(<strong>常以16进制给出</strong>) 如：DS&#x3D;0703H,偏移值[0003],内存地址物理表示为：07033H （5位16进制，<strong>总共20位2进制</strong>）</li><li>CS’是否使用内存储器</li><li>IO接口芯片 连接外部设备(键盘，屏幕等)</li></ul><p><img src="https://bu.dusays.com/2024/04/29/662f781787abd.png" alt="1d2309aa163c40e2a770d8b43e5a8626.png"></p><h2 id="总线周期"><a href="#总线周期" class="headerlink" title="总线周期"></a>总线周期</h2><p><img src="https://bu.dusays.com/2024/04/29/662f6e874db48.png" alt="20210412120620260.png"></p><ul><li>T1周期 将地址通过AD，A传入地址锁存器</li><li>T2周期 地址发送结束，AD发送数据</li><li>T3周期 cpu发送信号将数据写入内存储器</li><li>T4周期 空挡，信号复原</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>大学</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>汇编</tag>
+      
+      <tag>微机原理</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>前缀和</title>
+    <link href="/2024/04/27/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
+    <url>/2024/04/27/%E5%89%8D%E7%BC%80%E5%92%8C/</url>
+    
+    <content type="html"><![CDATA[<h1 id="前缀和"><a href="#前缀和" class="headerlink" title="前缀和"></a>前缀和</h1><h2 id="算法原理"><a href="#算法原理" class="headerlink" title="算法原理"></a>算法原理</h2><p>在程序设计中,可能会有查询一个长度为x的数组的相连m位的和的需求</p><ul><li>每次查询时间复杂度为m，若查询n次，时间复杂度就为n<em>m，*<em>0复杂度太高</em></em></li><li>这时可以使用前缀和思想优化算法</li><li>前缀和仅需一次时间复杂度为On的预处理，后续查询时间复杂度为O1</li><li>本质是把每次运算结果记录在前缀和数组中，<strong>以空间换时间</strong></li><li>前缀和数组数很大，开long！开long！！开long！！！<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> class 一维数组前缀和 &#123;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br><span class="hljs-type">Scanner</span> <span class="hljs-variable">scan</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br><span class="hljs-type">int</span> num[]=<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123;<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>,<span class="hljs-number">10</span>&#125;;<span class="hljs-comment">//目标数组</span><br><span class="hljs-type">int</span> sum[]=<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">11</span>];<span class="hljs-comment">//前缀和（差分数组）开long，切记，切记！这里不开了嫌麻烦</span><br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;<br>sum[i+<span class="hljs-number">1</span>]=num[i]+sum[i];<br>&#125;<br>System.err.println(sum[<span class="hljs-number">10</span>]);<br>System.err.println(sum[<span class="hljs-number">10</span>]-sum[<span class="hljs-number">8</span>]);<span class="hljs-comment">//以On的时间复杂度计算了10+9</span><br><span class="hljs-type">int</span> ans=<span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt;num.length; i++) &#123;<br>ans+=num[i];<br>&#125;<br>System.out.println(ans);<br>scan.close();<br>&#125;<br>&#125;<br><br></code></pre></td></tr></table></figure></li></ul><h2 id="算法应用"><a href="#算法应用" class="headerlink" title="算法应用"></a>算法应用</h2><p><a href="https://www.luogu.com.cn/problem/P1115">p1115最大子段和</a></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Scanner;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">p1115</span>最大子段和 &#123;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br><span class="hljs-type">Scanner</span> <span class="hljs-variable">scan</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br><span class="hljs-type">int</span> n=scan.nextInt();<br><span class="hljs-type">int</span> ans=Integer.MIN_VALUE;<span class="hljs-comment">//返回值是最大字段和,初始化为integer最小值</span><br><span class="hljs-type">int</span> sum_num[]=<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n+<span class="hljs-number">1</span>];<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;=n; i++) &#123;<span class="hljs-comment">//初步思路，前缀和+dp</span><br>sum_num[i]=sum_num[i-<span class="hljs-number">1</span>]+scan.nextInt();<br>&#125;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;n+<span class="hljs-number">1</span>; i++) &#123;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i-<span class="hljs-number">1</span>; j&gt;=<span class="hljs-number">0</span>; j--) &#123;<span class="hljs-comment">//不能将0计入</span><br><span class="hljs-type">int</span> sum=sum_num[i]-sum_num[j];<br>ans=Math.max(sum, ans);<br>&#125;<br>&#125;<br>System.out.println(ans);<br>scan.close();<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure><ul><li>该程序通过40%数据，仍需调优</li><li><del>坐牢的时候</del>想到了一个降低一半时间复杂的的优化方法：可以一边读入一边计算ans</li></ul><h2 id="妈的，寄！"><a href="#妈的，寄！" class="headerlink" title="妈的，寄！"></a>妈的，寄！</h2><p>还是过40</p><h3 id="改变思路"><a href="#改变思路" class="headerlink" title="改变思路"></a>改变思路</h3><p>想到使用线性DP<br>状态表示：DP[i]表示以第i位结尾时，最大子段和值<br>状态转移方程：DP[i]&#x3D;MAX(DP[i-1]+a[i],a[i])转移为<span class="label label-加上下一个数 blue"></span><strong>或</strong><span class="label label-抛弃前面的数字以下一个数为首位计算子段 blue"></span>取最大 ，太过简单不再赘述<br>滚动数组优化：DP&#x3D;MAX(DP+a[i],a[i])<br>优化空间复杂度，别忘了记录最大值<br><strong>经过计算不会爆int</strong></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Scanner;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> &#123;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br><span class="hljs-type">Scanner</span> <span class="hljs-variable">scan</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br><span class="hljs-type">int</span> dp=<span class="hljs-number">0</span>;<br><span class="hljs-type">int</span> ans=Integer.MIN_VALUE;<br><span class="hljs-type">int</span> n=scan.nextInt();<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br><span class="hljs-type">int</span> a=scan.nextInt();<br>dp=Math.max(dp+a, a);<br>ans=Math.max(ans, dp);<br>&#125;<br>System.out.println(ans);<br>scan.close();<br>&#125;<br>&#125;<br><br></code></pre></td></tr></table></figure><p><strong>AC</strong>!不愧是我。<img src="https://emotion.acs.pw/emotion/tieba_new/80.png" alt="80"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>算法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>基础算法</tag>
+      
+      <tag>java</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Stack</title>
+    <link href="/2024/04/25/Stack/"/>
+    <url>/2024/04/25/Stack/</url>
+    
+    <content type="html"><![CDATA[<h1 id="栈Stack"><a href="#栈Stack" class="headerlink" title="栈Stack"></a>栈Stack</h1><p>栈的特点：后进后先</p><p><img src="https://bu.dusays.com/2024/04/25/662a1aebcf2dd.jpeg" alt="44a4fc21bceebb16ef03f40dfd737cb2.jpeg"></p><ul><li>初始化Stack<Integer> stack&#x3D;new Stack&lt;&gt;();</li><li>栈的特点：先进后出</li><li>Object push(Object obj)压栈：压入栈顶&#x2F;或add效果相同</li><li>Object pop()弹栈：移除栈顶</li><li>Object peek()查看栈顶，但不弹栈</li><li>boolean isEmpty()返回：栈是否为空，<em>用法如</em> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">while</span>(!stack.isEmpty)&#123;<br>   <span class="hljs-keyword">do</span> some thing<br>   &#125;<br></code></pre></td></tr></table></figure></li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> &#123;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br><span class="hljs-type">Scanner</span> <span class="hljs-variable">scan</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br>Stack&lt;Integer&gt; stack=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Stack</span>&lt;&gt;();<br>scan.close();<br>&#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>算法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Java算法</tag>
+      
+      <tag>数据结构</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>并查集</title>
+    <link href="/2024/04/21/%E5%B9%B6%E6%9F%A5%E9%9B%86/"/>
+    <url>/2024/04/21/%E5%B9%B6%E6%9F%A5%E9%9B%86/</url>
+    
+    <content type="html"><![CDATA[<h1 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h1><h2 id="算法适用"><a href="#算法适用" class="headerlink" title="算法适用"></a>算法适用</h2><p>给定一些操作，查找联通块&#x2F;查找集合数&#x2F;查找环的个数</p><h2 id="节点初始化"><a href="#节点初始化" class="headerlink" title="节点初始化"></a>节点初始化</h2><pre><code class="hljs">创建一维数组，大小为n+1，数组索引代表节点名，数组值代表指向节点</code></pre><h2 id="查找父节点"><a href="#查找父节点" class="headerlink" title="查找父节点"></a>查找父节点</h2><pre><code class="hljs">若当前节点指向自身，为根节点，找到并返回否则，顺着指向的节点（数组索引位置的值）继续寻找</code></pre><h2 id="链接节点，合并集合"><a href="#链接节点，合并集合" class="headerlink" title="链接节点，合并集合"></a>链接节点，合并集合</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> a_value=find(a);<br><span class="hljs-type">int</span> b_value=find(b);<br>num[a_value]=b_value;<br></code></pre></td></tr></table></figure><pre><code class="hljs">若根节点相同，可以不连接</code></pre><p>同时，<span class="label label-若根节点相同，说明图中出现了环 blue"></span></p><h2 id="路径压缩"><a href="#路径压缩" class="headerlink" title="路径压缩"></a>路径压缩</h2><p>本质是存储搜索的结果</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">find</span><span class="hljs-params">(<span class="hljs-type">int</span> a)</span> &#123;<br><span class="hljs-keyword">if</span> (num[a]==a) <span class="hljs-keyword">return</span> a;<br><span class="hljs-keyword">else</span> &#123;<br>num[a]=find(num[a]);<span class="hljs-comment">//路径压缩</span><br><span class="hljs-keyword">return</span> num[a];<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="返回集合个数"><a href="#返回集合个数" class="headerlink" title="返回集合个数"></a>返回集合个数</h2><pre><code class="hljs">指向自身的节点为一个集合的父节点，统计数组值等于自身的节点个数</code></pre><h2 id="应用实例"><a href="#应用实例" class="headerlink" title="应用实例"></a>应用实例</h2><p>经典并查集题目<a href="https://www.lanqiao.cn/problems/110/learning/?page=1&first_category_id=1&problem_id=110">合根植物</a><br>一道搜索题，也可以用并查集来解<a href="https://www.luogu.com.cn/problem/P1451">细胞数量</a><br>使用面向对象的形式封装好</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.*;<br><span class="hljs-keyword">public</span> class 手搓并查集 &#123;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">bcj</span>&#123;<br><span class="hljs-keyword">static</span> <span class="hljs-type">int</span> num[];<br><span class="hljs-keyword">public</span> <span class="hljs-title function_">bcj</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<span class="hljs-comment">//参数是并查集的大小</span><br><span class="hljs-comment">// TODO 自动生成的构造函数存根</span><br> num=<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n+<span class="hljs-number">1</span>];<br> <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;=n; i++) &#123;<br>num[i]=i;<span class="hljs-comment">//初始化 所有的节点祖先指向自身</span><br>&#125;<br>&#125;<br><br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">find</span><span class="hljs-params">(<span class="hljs-type">int</span> a)</span> &#123;<br><span class="hljs-keyword">if</span> (num[a]==a) <span class="hljs-keyword">return</span> a;<br><span class="hljs-keyword">else</span> &#123;<br>num[a]=find(num[a]);<span class="hljs-comment">//路径压缩,find函数的参数一定要填数组的值，一层一层找上去，否则无限循环</span><br><span class="hljs-keyword">return</span> num[a];<br>&#125;<br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a,<span class="hljs-type">int</span> b)</span> &#123;<span class="hljs-comment">//链接节点</span><br><span class="hljs-type">int</span> a_value=find(a);<br><span class="hljs-type">int</span> b_value=find(b);<br>num[a_value]=b_value;<span class="hljs-comment">//次序不重要</span><br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">sumnode</span><span class="hljs-params">()</span> &#123;<br><span class="hljs-type">int</span> ans=<span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; num.length; i++) &#123;<br><span class="hljs-keyword">if</span>(num[i]==i) ans++;<br>&#125;<br><span class="hljs-keyword">return</span> ans;<br>&#125;<br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>Scanner scan=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br>bcj a=<span class="hljs-keyword">new</span> <span class="hljs-title class_">bcj</span>(scan.nextInt()*scan.nextInt());<br><span class="hljs-type">int</span> N=scan.nextInt();<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; N; i++) &#123;<br>a.add(scan.nextInt(), scan.nextInt());<br>&#125;<br>System.out.println(a.sumnode());<br>scan.close();<br>&#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>算法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Java算法</tag>
+      
+      <tag>基础算法</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>dosbox基础指令</title>
+    <link href="/2024/04/19/dosbox%E5%9F%BA%E7%A1%80%E6%8C%87%E4%BB%A4/"/>
+    <url>/2024/04/19/dosbox%E5%9F%BA%E7%A1%80%E6%8C%87%E4%BB%A4/</url>
+    
+    <content type="html"><![CDATA[<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>将 e:\tc20 虚拟为DOSBOX仿真环境的C盘</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mount c e:\tc20<br></code></pre></td></tr></table></figure><p>进入C盘（即 e:\tc20 ）</p><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">c:</span><br></code></pre></td></tr></table></figure><p><img src="https://bu.dusays.com/2024/04/19/662291d0be24f.png" alt="20210204222449925.png"><br>仿真执行DOS系统的各种操作</p><h4 id="进入调试模式"><a href="#进入调试模式" class="headerlink" title="进入调试模式"></a>进入调试模式</h4><figure class="highlight d"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs d"><span class="hljs-keyword">debug</span><br></code></pre></td></tr></table></figure><h4 id="写入指令"><a href="#写入指令" class="headerlink" title="写入指令"></a>写入指令</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">a</span><br></code></pre></td></tr></table></figure><h4 id="查看寄存器内容"><a href="#查看寄存器内容" class="headerlink" title="查看寄存器内容"></a>查看寄存器内容</h4><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">r</span><br></code></pre></td></tr></table></figure><p><img src="https://bu.dusays.com/2024/04/19/662291d0bf380.png" alt="20210204223027116.png"></p><h4 id="查看内存内容"><a href="#查看内存内容" class="headerlink" title="查看内存内容"></a>查看内存内容</h4><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">d</span><br></code></pre></td></tr></table></figure><p><img src="https://bu.dusays.com/2024/04/19/662291d0c8c3a.png" alt="20210204223301277.png"></p><h4 id="查看指令栈-将机器指令翻译成汇编指令"><a href="#查看指令栈-将机器指令翻译成汇编指令" class="headerlink" title="查看指令栈(将机器指令翻译成汇编指令)"></a>查看指令栈(将机器指令翻译成汇编指令)</h4><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">u</span><br></code></pre></td></tr></table></figure><p><img src="https://bu.dusays.com/2024/04/19/662291d0bedbf.png" alt="20210204223934420.png"></p><h4 id="执行（ip指向位置）指令"><a href="#执行（ip指向位置）指令" class="headerlink" title="执行（ip指向位置）指令"></a>执行（ip指向位置）指令</h4><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">t</span><br></code></pre></td></tr></table></figure><p><img src="https://bu.dusays.com/2024/04/19/662291d0db966.png" alt="20210204224055955.png"></p><h4 id="顺序运行到程序结束"><a href="#顺序运行到程序结束" class="headerlink" title="顺序运行到程序结束"></a>顺序运行到程序结束</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">p</span><br></code></pre></td></tr></table></figure><h4 id="退出"><a href="#退出" class="headerlink" title="退出"></a>退出</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">q</span><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>大学</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>汇编</tag>
+      
+      <tag>dosbox</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>DFS</title>
+    <link href="/2024/04/18/dfs/"/>
+    <url>/2024/04/18/dfs/</url>
+    
+    <content type="html"><![CDATA[<h1 id="dfs深度优先搜索与剪枝模板"><a href="#dfs深度优先搜索与剪枝模板" class="headerlink" title="dfs深度优先搜索与剪枝模板"></a>dfs深度优先搜索与剪枝模板</h1><h2 id="为什么要用dfs"><a href="#为什么要用dfs" class="headerlink" title="为什么要用dfs"></a>为什么要用dfs</h2><ul><li>提起dfs，最先会想到树和图的dfs，但算法中的dfs泛指一种<strong>暴力搜索</strong>的方式,即按照深度优先的次序来查找所有数据组合中符合需求的情况</li><li>与bfs（bfs先挖个坑）相比，dfs书写简单，容易理解<del>只要你够闲的话多写亿个for循环也能搞出来</del>，但容易<strong>爆栈</strong>，在使用时不要忘记观察数据范围，dfs大概率是过不了10的4次方以上的数据的</li><li>这里以洛谷p1025数的划分来举例讲解dfs</li></ul><hr><h1 id="NOIP2001-提高组-数的划分"><a href="#NOIP2001-提高组-数的划分" class="headerlink" title="[NOIP2001 提高组] 数的划分"></a>[NOIP2001 提高组] 数的划分</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>将整数 $n$ 分成 $k$ 份，且每份不能为空，任意两个方案不相同（不考虑顺序）。</p><p>例如：$n&#x3D;7$，$k&#x3D;3$，下面三种分法被认为是相同的。</p><p>$1,1,5$;<br>$1,5,1$;<br>$5,1,1$.</p><p>问有多少种不同的分法。</p><h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>$n,k$ （$6&lt;n \le 200$，$2  \le k  \le  6$）</p><h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>$1$ 个整数，即不同的分法。</p><h2 id="样例-1"><a href="#样例-1" class="headerlink" title="样例 #1"></a>样例 #1</h2><h3 id="样例输入-1"><a href="#样例输入-1" class="headerlink" title="样例输入 #1"></a>样例输入 #1</h3><figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">7 </span><span class="hljs-number">3</span><br></code></pre></td></tr></table></figure><h3 id="样例输出-1"><a href="#样例输出-1" class="headerlink" title="样例输出 #1"></a>样例输出 #1</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">4<br></code></pre></td></tr></table></figure><h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><p>四种分法为：<br>$1,1,5$;<br>$1,2,4$;<br>$1,3,3$;<br>$2,2,3$.</p><p><strong>【题目来源】</strong></p><p>NOIP 2001 提高组第二题</p><hr><ul><li>这是一道经典的dfs搜索题，首先来尝试暴力写法</li><li>输出为一个整数，定义ans变量记录分法</li><li>首先看题目的条件，分成k个数，我们定义count变量，当count=&#x3D;k时，这种情况符合题意，同时，这k个数的总和要&#x3D;n，我们定义sum变量，当count=&#x3D;k且sum&#x3D;&#x3D;n时，ans++;</li><li><span class="label label-为了保证所有情况不重复，循环时要令**后面的数大于等于前面的数** purple"></span><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Scanner;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> &#123;<br><span class="hljs-keyword">static</span> <span class="hljs-type">int</span> suml,countl;<br><span class="hljs-keyword">static</span> <span class="hljs-type">int</span> n,k,ans=<span class="hljs-number">0</span>;<span class="hljs-comment">//整数n,分成k份，有ans种方法</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>Scanner scan=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br>n=scan.nextInt();<br>k=scan.nextInt();<br>dfs(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>,<span class="hljs-number">0</span>);<br>System.out.println(ans);<br>scan.close();<br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> start ,<span class="hljs-type">int</span> sum,<span class="hljs-type">int</span> count)</span> &#123;<span class="hljs-comment">//参数：去重起始位，总和，数字个数</span><br><span class="hljs-keyword">if</span>(count==k) &#123;<span class="hljs-comment">//如果数字个数达到k，判断后一定要返回，不然无限循环</span><br><span class="hljs-keyword">if</span>(sum==n) &#123;<span class="hljs-comment">//如果相加等于n,ans+1</span><br>ans++;<br>&#125;<br><span class="hljs-keyword">return</span>;<span class="hljs-comment">//一定要有递归出口！！！！递归出口一定要写对位置！！！不然就是个爆栈！！！</span><br>&#125;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> start; i&lt;=n; i++) &#123;<span class="hljs-comment">//去重，保证后一个数一定大于等于前一个数</span><br>suml=sum+i;countl=count+<span class="hljs-number">1</span>;<br>dfs(i,suml,countl);<br>suml=sum-i;countl=count-<span class="hljs-number">1</span>;<br>&#125;<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure>| | | |<br>| | | |</li></ul><h2 id="剪枝"><a href="#剪枝" class="headerlink" title="剪枝"></a>剪枝</h2><ul><li><p>很显然，这种写法时间复杂度过高，无法通过所有测试用例,我们需要在for循环处做一些剪枝操作，不可能符合条件的值就不进入递归步骤</p></li><li><p>在写dfs时，习惯将判断条件放在最上面，剪枝等操作在进入递归前进行（for循环只是为了优化代码，不必要可以不写），<span class="label label-递归前后要进行状态标记和状态回退 red"></span></p></li><li><p>我们知道，枚举时后面的数一定大于等于前面的数，显然，当前的数i应符合这样的条件：<span class="label label-sum+i*(k-count)<=n red"></span></p></li><li><p>以下是优化过的代码</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Scanner;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">p1025</span>数的划分dfs剪枝 &#123;<br><span class="hljs-keyword">static</span> <span class="hljs-type">int</span> n,k,ans=<span class="hljs-number">0</span>;<span class="hljs-comment">//整数n,分成k份，有ans种方法</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>Scanner scan=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br>n=scan.nextInt();<br>k=scan.nextInt();<br>dfs(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>,<span class="hljs-number">0</span>);<br>System.out.println(ans);<br>scan.close();<br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> start ,<span class="hljs-type">int</span> sum,<span class="hljs-type">int</span> count)</span> &#123;<span class="hljs-comment">//参数：去重起始位，总和，数字个数</span><br><span class="hljs-keyword">if</span>(count==k) &#123;<span class="hljs-comment">//如果数字个数达到k，判断后一定要返回，不然无限循环</span><br><span class="hljs-keyword">if</span>(sum==n) &#123;<span class="hljs-comment">//如果相加等于n,ans+1</span><br>ans++;<br>&#125;<br><span class="hljs-keyword">return</span>;<span class="hljs-comment">//一定要有递归出口！！！！递归出口一定要写对位置！！！不然就是个爆栈！！！</span><br>&#125;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> start; sum+i*(k-count)&lt;=n; i++) &#123;<span class="hljs-comment">//去重，保证后一个数一定大于等于前一个数+减枝</span><br>dfs(i,sum+i,count+<span class="hljs-number">1</span>);<span class="hljs-comment">//可以这样写，也完成了状态标记和回退操作</span><br>&#125;<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>算法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Java算法</tag>
+      
+      <tag>基础算法</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>字符串String和StringBuilder</title>
+    <link href="/2024/04/17/%E5%AD%97%E7%AC%A6%E4%B8%B2String%E5%92%8CStringBuilder/"/>
+    <url>/2024/04/17/%E5%AD%97%E7%AC%A6%E4%B8%B2String%E5%92%8CStringBuilder/</url>
+    
+    <content type="html"><![CDATA[<h1 id="字符串类型和stringbuilder类"><a href="#字符串类型和stringbuilder类" class="headerlink" title="字符串类型和stringbuilder类"></a>字符串类型和stringbuilder类</h1><h2 id="字符串类"><a href="#字符串类" class="headerlink" title="字符串类"></a>字符串类</h2><h3 id="String类，即字符串，java中所有字符串皆为该类对象"><a href="#String类，即字符串，java中所有字符串皆为该类对象" class="headerlink" title="String类，即字符串，java中所有字符串皆为该类对象"></a>String类，即字符串，java中所有字符串皆为该类对象</h3><ul><li>String类固定用final修饰，<em>创建后不可更改</em>！！而字符串缓冲区（StringBuffer）支持可变字符串</li><li>！！由于String类对象都为final所以可被共享，即通过new申请内存空间后，只要字符序列（顺序和大小写）相同，无论再程序不同位置出现几次，jvm都<strong>只会建立一个String对象</strong><br> 创建空字符串：String snull&#x3D;new String();<br> 参数为字符串的构造方法：String str&#x3D;new String(“value”);</li></ul><h3 id="String类常用方法"><a href="#String类常用方法" class="headerlink" title="String类常用方法"></a>String类常用方法</h3><ul><li>char charAt(int index)返回索引位置字符</li><li>int length()返回字符串长度（<em>字符个数</em>）</li><li>int indexOf(string)返回指定子字符串<strong>第一次</strong>出现位置,<em>不存在返回-1</em></li><li>String concat（String str）将str连接到字符串<strong>结尾</strong></li><li>int compareTo(Object obj）<strong>重要！！以字典序进行比较，大于返回1，等于返回0，小于返回-1</strong></li><li>char[] toCharArray()转化为字符串数组，便于操作，<strong>常用</strong></li></ul><hr><h2 id="StringBuilder字符串构造器"><a href="#StringBuilder字符串构造器" class="headerlink" title="StringBuilder字符串构造器"></a>StringBuilder字符串构造器</h2><ul><li>常用构造方法为无参构造：StringBuilder sb&#x3D;new StringBuilder()</li><li>char charAt(int index)返回索引位置字符</li><li>int indexOf(string)返回指定子字符串第一次出现位置,不存在返回-1</li><li><strong>重点</strong>reveserse!!—StringBuilder reverse()<strong>返回顺序反转的StringBuilder对象</strong></li><li>boolen isEmpty()判断字符串是否为空</li><li>void append(Object obj)在末尾添加字符串</li><li>insert(int index, String x)在索引位置<strong>前面</strong>添加字符<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> &#123;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br><span class="hljs-type">Scanner</span> <span class="hljs-variable">scan</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br>String snull=<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>();<span class="hljs-comment">//创建空字符串</span><br>String str=<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-string">&quot;value&quot;</span>);<br>System.err.println(str.charAt(<span class="hljs-number">0</span>));<br>System.err.println(str.indexOf(<span class="hljs-string">&quot;al&quot;</span>));<br>str.toCharArray();<br>StringBuilder sb=<span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>sb.append(<span class="hljs-string">&quot;wc&quot;</span>);<br>sb.insert(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;NB&quot;</span>);<span class="hljs-comment">//添加到索引位置前面</span><br>System.out.println(sb.reverse());<br>scan.close();<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>算法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Java算法</tag>
+      
+      <tag>数据结构</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>快速幂</title>
+    <link href="/2024/04/16/%E5%BF%AB%E9%80%9F%E5%B9%82/"/>
+    <url>/2024/04/16/%E5%BF%AB%E9%80%9F%E5%B9%82/</url>
+    
+    <content type="html"><![CDATA[<h1 id="快速幂算法"><a href="#快速幂算法" class="headerlink" title="快速幂算法"></a>快速幂算法</h1><ul><li>利用对幂次做<strong>加法分解</strong>，再相乘,得到o(long(n))的求幂算法</li><li>快速幂算法，输入参数为a^n</li><li><strong>返回值ans初始化为1</strong></li><li>while n不为0</li><li>（if）若每次循环n转化为<strong>二进制形式末尾为1</strong></li><li>ans*&#x3D;a</li><li><strong>每次循环</strong></li><li>a*&#x3D;a</li><li>二进制n后<strong>右</strong>移一位,即除2<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Scanner;<br><span class="hljs-keyword">public</span> class 快速幂算法 &#123;<br> <span class="hljs-keyword">static</span> <span class="hljs-type">long</span> <span class="hljs-title function_">qmi</span><span class="hljs-params">(<span class="hljs-type">long</span> a,<span class="hljs-type">long</span> b)</span>&#123;<br>    <span class="hljs-type">long</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">while</span>(b&gt;<span class="hljs-number">0</span>)&#123;<br>      <span class="hljs-keyword">if</span>((b&amp;<span class="hljs-number">1</span>)&gt;<span class="hljs-number">0</span>)&#123;<br>        res = (res*a);<br>      &#125;<br>      a = (a*a);<br>      b&gt;&gt;=<span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;<br><span class="hljs-comment">/*利用对幂次做加法分解，再相乘,得到o(long(n))的求幂算法*/</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">ksm</span><span class="hljs-params">(<span class="hljs-type">int</span> a,<span class="hljs-type">int</span> n)</span> &#123;<span class="hljs-comment">//快速幂算法，参数表示a^n</span><br><span class="hljs-type">int</span> ans=<span class="hljs-number">1</span>;<br><span class="hljs-keyword">while</span>(n&gt;<span class="hljs-number">0</span>) &#123;<br><span class="hljs-keyword">if</span> ((n&amp;<span class="hljs-number">1</span>)==<span class="hljs-number">1</span>) &#123;<span class="hljs-comment">//若此时的n转化为二进制后末尾为1</span><br>ans*=a;<span class="hljs-comment">//数据过大时，可在此处取模</span><br>&#125;<br>a*=a;<span class="hljs-comment">//数据过大时，可在此处取模</span><br>n&gt;&gt;=<span class="hljs-number">1</span>;<span class="hljs-comment">//转化为二进制后右移一位</span><br>&#125;<br><span class="hljs-keyword">return</span> ans;<br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>Scanner in=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br><span class="hljs-type">int</span> a=in.nextInt();<span class="hljs-type">int</span> b=in.nextInt();<br>System.out.println(ksm(a, b));<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>算法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Java算法</tag>
+      
+      <tag>基础算法</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>set集合</title>
+    <link href="/2024/04/15/set%E9%9B%86%E5%90%88/"/>
+    <url>/2024/04/15/set%E9%9B%86%E5%90%88/</url>
+    
+    <content type="html"><![CDATA[<h1 id="hashset类常用方法"><a href="#hashset类常用方法" class="headerlink" title="hashset类常用方法"></a>hashset类常用方法</h1><ul><li>add(Object obj)<strong>向集合中添加元素</strong>，添加成返回true，失败（集合中已有该元素）返回false</li><li>size()<strong>返回集合中元素个数</strong></li><li>remove（Object obj）<strong>删除set集合元素</strong>，成功返回true，失败返回false</li><li>contains(Object obj)<strong>查询集合中的元素</strong>，若set包含元素，返回true，否则返回false</li><li>clear()<strong>清除集合中所有元素</strong></li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.HashSet;<br><span class="hljs-keyword">import</span> java.util.Scanner;<br><span class="hljs-keyword">import</span> java.util.Set;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">___set</span>集合 &#123;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>Scanner scan= <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br><span class="hljs-type">boolean</span> flag=<span class="hljs-literal">false</span>;<br>Set&lt;Integer&gt; hset=<span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();<br>flag=hset.add(<span class="hljs-number">1</span>);<br>System.out.println(flag);<span class="hljs-comment">//add成功，返回true</span><br>flag=hset.add(<span class="hljs-number">1</span>);<br>System.out.println(flag);<span class="hljs-comment">//add失败，返回false</span><br>scan.close();<br>&#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>算法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Java算法</tag>
+      
+      <tag>数据结构</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>二分法</title>
+    <link href="/2024/04/15/%E4%BA%8C%E5%88%86/"/>
+    <url>/2024/04/15/%E4%BA%8C%E5%88%86/</url>
+    
+    <content type="html"><![CDATA[<h1 id="二分法"><a href="#二分法" class="headerlink" title="二分法"></a>二分法</h1><h2 id="二分搜索算法"><a href="#二分搜索算法" class="headerlink" title="二分搜索算法"></a>二分搜索算法</h2><ul><li>用于在有序集合中查找元素，时间复杂度为ologN</li><li>二分具有二段性：给定条件可以将集合中元素分为两部分，一部分满足条件，一部分不满足条件</li></ul><hr><h1 id="步骤！！！！！！！！"><a href="#步骤！！！！！！！！" class="headerlink" title="步骤！！！！！！！！"></a>步骤！！！！！！！！</h1><ul><li>首先将（有序）集合分成两段，<strong>左边段</strong>[left,n-1]<strong>右边段</strong>[n,right]</li><li>若mid落在左半段（&lt;n）left&#x3D;mid</li><li>若mid落在右半段（&gt;&#x3D;n）right&#x3D;mid</li><li>然后else中left向右移动（加1），right向左移动（减1）</li><li>若出现left&#x3D;mid,计算mid要向上取整（加1）</li><li>勤加练习，必能掌握</li></ul><h3 id="java实现"><a href="#java实现" class="headerlink" title="java实现"></a>java实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">int</span> arr[]=<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>&#125;;<br><span class="hljs-type">int</span> left=<span class="hljs-number">0</span>,right=<span class="hljs-number">5</span>;<br><span class="hljs-type">int</span> left1=<span class="hljs-number">0</span>,right1=<span class="hljs-number">5</span>;<br><span class="hljs-type">int</span> k=<span class="hljs-number">3</span>;<span class="hljs-comment">//要查找的值</span><br><span class="hljs-keyword">while</span>(left&lt;right) &#123;<span class="hljs-comment">//查找上界</span><br><span class="hljs-type">int</span> mid=(left+right)&gt;&gt;<span class="hljs-number">1</span>;<br><span class="hljs-keyword">if</span>(arr[mid]&gt;=k) &#123;<span class="hljs-comment">//界限可变</span><br>right=mid;<br>&#125;<br><span class="hljs-keyword">else</span> &#123;<br>left=mid+<span class="hljs-number">1</span>;<br>&#125;<br>&#125;<br><span class="hljs-keyword">while</span>(left1&lt;right1) &#123;<span class="hljs-comment">//查找下界</span><br><span class="hljs-type">int</span> mid=(left1+right1+<span class="hljs-number">1</span>)&gt;&gt;<span class="hljs-number">1</span>;<br><span class="hljs-keyword">if</span>(arr[mid]&lt;k) &#123;<br>left1=mid;<br>&#125;<br><span class="hljs-keyword">else</span> &#123;<br>right1=mid-<span class="hljs-number">1</span>;<br>&#125;<br>&#125;<br>System.out.println(left+<span class="hljs-string">&quot; &quot;</span>+left1);<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>算法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Java算法</tag>
+      
+      <tag>基础算法</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="/2024/04/14/hello-world/"/>
+    <url>/2024/04/14/hello-world/</url>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="创建新文章"><a href="#创建新文章" class="headerlink" title="创建新文章"></a>创建新文章</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>详情: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="启动本地服务器"><a href="#启动本地服务器" class="headerlink" title="启动本地服务器"></a>启动本地服务器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>详情: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="生成静态文件"><a href="#生成静态文件" class="headerlink" title="生成静态文件"></a>生成静态文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>详情: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="远程服务器部署"><a href="#远程服务器部署" class="headerlink" title="远程服务器部署"></a>远程服务器部署</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>详情: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a><br><img src="https://bu.dusays.com/2024/04/15/661d185a37e59.jpg" alt="v2-cadb722c283c20b1a24f56581995d1f9_r.jpg"></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>博客入门</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  
+</search>
