@@ -4,6 +4,58 @@
   
     
     <entry>
+      <title>数据库基础</title>
+      <link href="/2024/05/08/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/"/>
+      <url>/2024/05/08/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/</url>
+      
+        <content type="html"><![CDATA[<h1 id="MySQL的安装和配置"><a href="#MySQL的安装和配置" class="headerlink" title="MySQL的安装和配置"></a>MySQL的安装和配置</h1><ul><li>尽量不要下载最新版，安装时可能没有开发者版本<br><a href="https://downloads.mysql.com/archives/installer/">官方安装链接</a></li><li>安装后配置MySQL的root用户密码，我的密码是<strong>123456</strong><br><em>若安装时忘记root密码，可在安装程序中删除注册表，再重新安装配置</em></li><li>添加环境变量，要写成Mysql\bin\的形式<br><em>若不知道MySQl装在哪里，可以Win+R输入services.msc，在服务中找到MySQL,右键找到根目录</em></li><li>启动MySQL 一般开机自启，也可以在cmd输入net start&#x2F;stop mysql80<br><em>使用管理员模式启动cmd</em></li><li>连接数据库 mysql -u root -p</li></ul><h1 id="关系数据库基础"><a href="#关系数据库基础" class="headerlink" title="关系数据库基础"></a>关系数据库基础</h1><h2 id="基本定义"><a href="#基本定义" class="headerlink" title="基本定义"></a>基本定义</h2><ul><li><p>域：一组具有<strong>相同数据类型</strong>的值的<strong>集合</strong>，如整数，实数，性别</p></li><li><p>笛卡儿积：所有域的<strong>所有取值</strong>的组合<br>  D1{a，b} D2{c,d}<br>  D1*D2&#x3D;{(a,c),(a,d),(b,c),(b,d)}</p></li><li><p>元组：<strong>笛卡儿积中每一个元素</strong>称作一个元组(Tuple),如(a,c)</p></li><li><p>分量：元组中每一个值称作一个分量</p></li><li><p>基数：笛卡尔积中的元素数量，如例中基数为2*2&#x3D;4</p></li></ul><h3 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h3><ul><li>关系的表示<table><thead><tr><th>属性1</th><th align="center">属性2</th><th>属性3</th></tr></thead><tbody><tr><td>1</td><td align="center">a</td><td>b</td></tr><tr><td>2</td><td align="center">c</td><td>d</td></tr><tr><td>3</td><td align="center">e</td><td>f</td></tr></tbody></table></li><li>表的每行对应一个<strong>元组</strong>，表的每列对应一个<strong>属性</strong>属性的取值范围叫做<strong>域</strong></li><li>n目&#x2F;度关系必须有n个属性</li></ul><h3 id="码"><a href="#码" class="headerlink" title="码"></a>码</h3><ul><li>候选码：关系中某一属性的值能<strong>唯一</strong>地标识一个元组，称为候选码，<strong>可以有一个或多个</strong></li><li>全码：极端情况下，关系中<strong>所有属性</strong>都为这个关系的<strong>候选码</strong>，称为全码</li><li><strong>主码</strong>：若一个关系有多个候选码，则选定其中一个为<strong>主码</strong>，<strong>主码只有一个！</strong></li><li>主属性：候选码的诸属性</li><li>非主属性</li></ul><h3 id="三类关系"><a href="#三类关系" class="headerlink" title="三类关系"></a>三类关系</h3><ul><li>基本关系(基本表) 实际存在的表</li><li>查询表 查询结果的表</li><li>视图表 导出的表，是虚表</li></ul><h2 id="关系模式"><a href="#关系模式" class="headerlink" title="关系模式"></a>关系模式</h2><p>   <em>是对关系的描述</em></p><h3 id="定义关系模式"><a href="#定义关系模式" class="headerlink" title="定义关系模式"></a>定义关系模式</h3><p>形式：R(U,D,DOM,F)<br>R:关系名<br>U:组成关系的<strong>属性名</strong>的集合<br>D:属性U中属性来自的<strong>域</strong><br>DOM:属性向域的<strong>映像</strong>集合<br>F:属性间数据<strong>依赖</strong>关系</p><ul><li>关系模式和关系：关系模式是<strong>静态</strong>的，稳定的 ，关系是<strong>动态</strong>的，随时间不断变化的</li><li>关系可以看作关系模式在某一时刻的状态或内容</li></ul><h1 id="基本关系操作"><a href="#基本关系操作" class="headerlink" title="基本关系操作"></a>基本关系操作</h1><p><img src="https://bu.dusays.com/2024/05/08/663b4a16a2d31.png" alt="20200325101604577.png"></p><ul><li>注意，<strong>基本</strong>关系运算只有五种：并（U）、差、（—）笛卡尔积（X）、投影、选择</li><li>其它运算即交、连接和除，均可通过5种基本的运算来表达</li></ul><h2 id="关系完整性"><a href="#关系完整性" class="headerlink" title="关系完整性"></a>关系完整性</h2><ul><li><strong>实体完整性</strong>：若属性A是基本关系R的主属性，则属性A不能取空值<br><del>教材上没有</del>补充：不能取空，也<strong>不能相同</strong>，也不能随意<strong>更改</strong></li><li><strong>参照完整性</strong>：若属性或属性组F是基本关系R的外码它与基本关系S的主码Ks相对应，则对于R中每个元组在F上的值必须为<strong>空值</strong>（F的每个属性值<strong>均为空值</strong>）或<strong>等于S中某个元组的主码值</strong></li><li><strong>用户自定义完整性</strong></li><li><strong>外码</strong>：外码：设F是基本关系R的一个或一组属性，但不是关系R的码。如果F与基本关系S的主码Ks相对应，则称F是基本关系R的外码<br>基本关系R称为<strong>参照关系</strong><br>基本关系S称为<strong>被参照关系</strong></li><li>关系R和S不一定是不同关系</li><li>S和K必须定义在同一个域上</li><li>外码<strong>不一定</strong>要与对应主码同名</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据库 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数据库基础 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>排序</title>
+      <link href="/2024/05/06/%E6%8E%92%E5%BA%8F/"/>
+      <url>/2024/05/06/%E6%8E%92%E5%BA%8F/</url>
+      
+        <content type="html"><![CDATA[<h2 id="数组排序"><a href="#数组排序" class="headerlink" title="数组排序"></a>数组排序</h2><ul><li>Arrays.sort(int a[])对数组所有元素进行排序，默认升序</li><li>使<strong>用Lamda表达式</strong>修改排序</li><li><em>升序</em>：Arrays.sort(int a[]，(o1,o2)-&gt;o1-o2)</li><li><em>降序</em>：Arrays.sort(int a[]，(o1,o2)-&gt;o2-o1)</li><li><strong>对二维数组按第n个值排序</strong></li><li>Arrays.sort(nums,(o1,o2)-&gt;o1[n]-o2[n])可以应对复杂比较规则</li></ul><hr><ul><li>集合排序，使用与Arraylist，set等集合结构</li><li>Collections.sort(List&lt;&gt;arr)</li><li>集合排序也可以使用lamada表达式重写比较器<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br><span class="hljs-type">Scanner</span> <span class="hljs-variable">scan</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br><span class="hljs-type">int</span>[] num=<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123;<span class="hljs-number">1</span>,<span class="hljs-number">7</span>,<span class="hljs-number">9</span>,<span class="hljs-number">4</span>,<span class="hljs-number">7</span>,<span class="hljs-number">3</span>&#125;;<br><span class="hljs-type">int</span>[][] nums=<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[][] &#123;&#123;<span class="hljs-number">1</span>,<span class="hljs-number">4</span>,<span class="hljs-number">9</span>&#125;,&#123;<span class="hljs-number">2</span>,<span class="hljs-number">5</span>,<span class="hljs-number">8</span>&#125;,&#123;<span class="hljs-number">6</span>,<span class="hljs-number">9</span>,<span class="hljs-number">45</span>&#125;,&#123;<span class="hljs-number">5</span>,<span class="hljs-number">8</span>,<span class="hljs-number">10</span>&#125;,&#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">7</span>&#125;&#125;;<br>Arrays.sort(num);<br>Arrays.sort(nums,(o1,o2)-&gt;(o1[<span class="hljs-number">0</span>]-o2[<span class="hljs-number">0</span>])-(o1[<span class="hljs-number">2</span>]));<span class="hljs-comment">//可以这样重写</span><br><span class="hljs-comment">//Arrays.sort(nums);报错</span><br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; num.length; i++) &#123;<br>System.out.print(num[i]+<span class="hljs-string">&quot; &quot;</span>);<br>&#125;<br>System.err.println(<span class="hljs-string">&quot;------num&quot;</span>);<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length; i++) &#123;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; nums[i].length; j++) &#123;<br>System.out.println(nums[i][j]+<span class="hljs-string">&quot; &quot;</span>);<br>&#125;<br>System.out.println();<br>&#125;<br>scan.close();<br>&#125;<br><br></code></pre></td></tr></table></figure></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 基础算法 </tag>
+            
+            <tag> java算法 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>8086总线操作</title>
       <link href="/2024/04/28/8086%E5%BE%AE%E5%A4%84%E7%90%86%E5%99%A8/"/>
       <url>/2024/04/28/8086%E5%BE%AE%E5%A4%84%E7%90%86%E5%99%A8/</url>
@@ -220,33 +272,6 @@
     
     
     <entry>
-      <title>set集合</title>
-      <link href="/2024/04/15/set%E9%9B%86%E5%90%88/"/>
-      <url>/2024/04/15/set%E9%9B%86%E5%90%88/</url>
-      
-        <content type="html"><![CDATA[<h1 id="hashset类常用方法"><a href="#hashset类常用方法" class="headerlink" title="hashset类常用方法"></a>hashset类常用方法</h1><ul><li>add(Object obj)<strong>向集合中添加元素</strong>，添加成返回true，失败（集合中已有该元素）返回false</li><li>size()<strong>返回集合中元素个数</strong></li><li>remove（Object obj）<strong>删除set集合元素</strong>，成功返回true，失败返回false</li><li>contains(Object obj)<strong>查询集合中的元素</strong>，若set包含元素，返回true，否则返回false</li><li>clear()<strong>清除集合中所有元素</strong></li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.HashSet;<br><span class="hljs-keyword">import</span> java.util.Scanner;<br><span class="hljs-keyword">import</span> java.util.Set;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">___set</span>集合 &#123;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>Scanner scan= <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br><span class="hljs-type">boolean</span> flag=<span class="hljs-literal">false</span>;<br>Set&lt;Integer&gt; hset=<span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();<br>flag=hset.add(<span class="hljs-number">1</span>);<br>System.out.println(flag);<span class="hljs-comment">//add成功，返回true</span><br>flag=hset.add(<span class="hljs-number">1</span>);<br>System.out.println(flag);<span class="hljs-comment">//add失败，返回false</span><br>scan.close();<br>&#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>]]></content>
-      
-      
-      <categories>
-          
-          <category> 算法 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Java算法 </tag>
-            
-            <tag> 数据结构 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>二分法</title>
       <link href="/2024/04/15/%E4%BA%8C%E5%88%86/"/>
       <url>/2024/04/15/%E4%BA%8C%E5%88%86/</url>
@@ -266,6 +291,33 @@
             <tag> Java算法 </tag>
             
             <tag> 基础算法 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>set集合</title>
+      <link href="/2024/04/15/set%E9%9B%86%E5%90%88/"/>
+      <url>/2024/04/15/set%E9%9B%86%E5%90%88/</url>
+      
+        <content type="html"><![CDATA[<h1 id="hashset类常用方法"><a href="#hashset类常用方法" class="headerlink" title="hashset类常用方法"></a>hashset类常用方法</h1><ul><li>add(Object obj)<strong>向集合中添加元素</strong>，添加成返回true，失败（集合中已有该元素）返回false</li><li>size()<strong>返回集合中元素个数</strong></li><li>remove（Object obj）<strong>删除set集合元素</strong>，成功返回true，失败返回false</li><li>contains(Object obj)<strong>查询集合中的元素</strong>，若set包含元素，返回true，否则返回false</li><li>clear()<strong>清除集合中所有元素</strong></li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.HashSet;<br><span class="hljs-keyword">import</span> java.util.Scanner;<br><span class="hljs-keyword">import</span> java.util.Set;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">___set</span>集合 &#123;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>Scanner scan= <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br><span class="hljs-type">boolean</span> flag=<span class="hljs-literal">false</span>;<br>Set&lt;Integer&gt; hset=<span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();<br>flag=hset.add(<span class="hljs-number">1</span>);<br>System.out.println(flag);<span class="hljs-comment">//add成功，返回true</span><br>flag=hset.add(<span class="hljs-number">1</span>);<br>System.out.println(flag);<span class="hljs-comment">//add失败，返回false</span><br>scan.close();<br>&#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java算法 </tag>
+            
+            <tag> 数据结构 </tag>
             
         </tags>
       
