@@ -24,7 +24,7 @@
 <meta property="og:description" content="并查集算法适用给定一些操作，查找联通块&#x2F;查找集合数&#x2F;查找环的个数 节点初始化创建一维数组，大小为n+1，数组索引代表节点名，数组值代表指向节点  查找父节点若当前节点指向自身，为根节点，找到并返回 否则，顺着指向的节点（数组索引位置的值）继续寻找  链接节点，合并集合123int a_value&#x3D;find(a);int b_value&#x3D;find(b);num[a_value]&#x3D;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-04-21T09:43:08.000Z">
-<meta property="article:modified_time" content="2024-05-03T03:21:57.740Z">
+<meta property="article:modified_time" content="2024-07-27T13:40:16.539Z">
 <meta property="article:author" content="Fireworks">
 <meta property="article:tag" content="Java算法">
 <meta property="article:tag" content="基础算法">
@@ -66,6 +66,12 @@
     <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
+
+
+  
+<link rel="stylesheet" href="/css/diy/shubiao.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/toubudaziji.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
 
 
 
@@ -263,7 +269,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          459 字
+          473 字
         
       </span>
     
@@ -325,7 +331,7 @@
 <h2 id="链接节点，合并集合"><a href="#链接节点，合并集合" class="headerlink" title="链接节点，合并集合"></a>链接节点，合并集合</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> a_value=find(a);<br><span class="hljs-type">int</span> b_value=find(b);<br>num[a_value]=b_value;<br></code></pre></td></tr></table></figure>
 <pre><code class="hljs">若根节点相同，可以不连接
 </code></pre>
-<p>同时，<span class="label label-若根节点相同，说明图中出现了环 blue"></span></p>
+<p>同时，若根节点相同，说明图中出现了环 </p>
 <h2 id="路径压缩"><a href="#路径压缩" class="headerlink" title="路径压缩"></a>路径压缩</h2><p>本质是存储搜索的结果</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">find</span><span class="hljs-params">(<span class="hljs-type">int</span> a)</span> &#123;<br>	<span class="hljs-keyword">if</span> (num[a]==a) <span class="hljs-keyword">return</span> a;<br>	<span class="hljs-keyword">else</span> &#123;<br>	num[a]=find(num[a]);<span class="hljs-comment">//路径压缩</span><br>		<span class="hljs-keyword">return</span> num[a];<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h2 id="返回集合个数"><a href="#返回集合个数" class="headerlink" title="返回集合个数"></a>返回集合个数</h2><pre><code class="hljs">指向自身的节点为一个集合的父节点，统计数组值等于自身的节点个数
@@ -714,6 +720,13 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/yinghua.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicLine.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/metowolf/Metingjs@1.2/dist/Meting.min.js"></script>
 
 
 

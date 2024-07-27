@@ -24,8 +24,9 @@
 <meta property="og:description" content="MySQL的安装和配置 尽量不要下载最新版，安装时可能没有开发者版本官方安装链接 安装后配置MySQL的root用户密码，我的密码是123456若安装时忘记root密码，可在安装程序中删除注册表，再重新安装配置 添加环境变量，要写成Mysql\bin\的形式若不知道MySQl装在哪里，可以Win+R输入services.msc，在服务中找到MySQL,右键找到根目录 启动MySQL 一般开机自启，">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://bu.dusays.com/2024/05/08/663b4a16a2d31.png">
+<meta property="og:image" content="https://bu.dusays.com/2024/06/02/665bf0d4f3713.png">
 <meta property="article:published_time" content="2024-05-08T07:07:11.000Z">
-<meta property="article:modified_time" content="2024-05-08T13:03:26.917Z">
+<meta property="article:modified_time" content="2024-06-02T12:10:23.997Z">
 <meta property="article:author" content="Fireworks">
 <meta property="article:tag" content="数据库基础">
 <meta name="twitter:card" content="summary_large_image">
@@ -67,6 +68,12 @@
     <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
+
+
+  
+<link rel="stylesheet" href="/css/diy/shubiao.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/toubudaziji.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
 
 
 
@@ -264,7 +271,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          903 字
+          1.2k 字
         
       </span>
     
@@ -275,7 +282,7 @@
         
         
         
-          8 分钟
+          10 分钟
         
       </span>
     
@@ -337,7 +344,9 @@
 </li>
 </ul>
 <h3 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h3><ul>
-<li>关系的表示<table>
+<li>关系的表示</li>
+</ul>
+<table>
 <thead>
 <tr>
 <th>属性1</th>
@@ -361,7 +370,7 @@
 <td>f</td>
 </tr>
 </tbody></table>
-</li>
+<ul>
 <li>表的每行对应一个<strong>元组</strong>，表的每列对应一个<strong>属性</strong>属性的取值范围叫做<strong>域</strong></li>
 <li>n目&#x2F;度关系必须有n个属性</li>
 </ul>
@@ -383,7 +392,7 @@
 <li>关系模式和关系：关系模式是<strong>静态</strong>的，稳定的 ，关系是<strong>动态</strong>的，随时间不断变化的</li>
 <li>关系可以看作关系模式在某一时刻的状态或内容</li>
 </ul>
-<h1 id="基本关系操作"><a href="#基本关系操作" class="headerlink" title="基本关系操作"></a>基本关系操作</h1><p><img src="https://bu.dusays.com/2024/05/08/663b4a16a2d31.png" srcset="/img/loading.gif" lazyload alt="20200325101604577.png"></p>
+<h1 id="基本关系操作"><a href="#基本关系操作" class="headerlink" title="基本关系操作"></a>基本关系操作</h1><p><img src="https://bu.dusays.com/2024/05/08/663b4a16a2d31.png" srcset="/img/loading.gif" lazyload></p>
 <ul>
 <li>注意，<strong>基本</strong>关系运算只有五种：并（U）、差、（—）笛卡尔积（X）、投影、选择</li>
 <li>其它运算即交、连接和除，均可通过5种基本的运算来表达</li>
@@ -397,6 +406,143 @@
 <li>S和K必须定义在同一个域上</li>
 <li>外码<strong>不一定</strong>要与对应主码同名</li>
 </ul>
+<h2 id="专门的关系运算-p10"><a href="#专门的关系运算-p10" class="headerlink" title="专门的关系运算 &#x2F;p10"></a>专门的关系运算 &#x2F;p10</h2><ul>
+<li><strong>选择</strong>：在关系R中选择满足条件的诸元组<strong>选出行</strong><br><strong>σf(r)</strong>&#x3D;{t|t∈R∩F(t)&#x3D;’true’}<br>其中，f为选择条件,R为目标表<br>如σSage&lt;20（Student）查询学生表（Student）中年龄（Sage）小于20的学生的所有信息（元组）</li>
+<li><strong>投影</strong>：从关系R中选出若干属性列组成新关系<strong>选出列</strong><br><strong>πA(R)</strong>&#x3D;{T[A]|t∈R}<br>其中，A为R的属性列，R为目标表<br>如πSnane,Sdepet(Student)查询学生的姓名和所在系<br>可以去重，显示不重复的分量</li>
+<li><strong>连接</strong>：从两个关系的笛卡儿积中选取属性将间满足一定关系的元组<br><img src="https://bu.dusays.com/2024/06/02/665bf0d4f3713.png" srcset="/img/loading.gif" lazyload><br>其中A和B分别为R和S上度数相等且可比的属性组<br>连接的结果是满足条件的属性组<br>主要分为两种：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th align="center">B</th>
+<th>C</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>a1</td>
+<td align="center">b1</td>
+<td>5</td>
+</tr>
+<tr>
+<td>a1</td>
+<td align="center">b2</td>
+<td>6</td>
+</tr>
+<tr>
+<td>a2</td>
+<td align="center">b3</td>
+<td>8</td>
+</tr>
+<tr>
+<td>a2</td>
+<td align="center">b4</td>
+<td>12</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>B</th>
+<th align="center">E</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>b1</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td>b2</td>
+<td align="center">7</td>
+</tr>
+<tr>
+<td><strong>b3</strong></td>
+<td align="center">10</td>
+</tr>
+<tr>
+<td><strong>b3</strong></td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td>b5</td>
+<td align="center">2</td>
+</tr>
+</tbody></table>
+<p>1.等值链接R⊳⊲S A，B属性值相同<br>          A&#x3D;B</p>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th align="center">R.B</th>
+<th>C</th>
+<th>S.B</th>
+<th>E</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>a1</td>
+<td align="center">b1</td>
+<td>5</td>
+<td>b1</td>
+<td>3</td>
+</tr>
+<tr>
+<td>a1</td>
+<td align="center">b2</td>
+<td>6</td>
+<td>b2</td>
+<td>7</td>
+</tr>
+<tr>
+<td>a2</td>
+<td align="center">b3</td>
+<td>8</td>
+<td>b3</td>
+<td>10</td>
+</tr>
+<tr>
+<td>a2</td>
+<td align="center">b3</td>
+<td>8</td>
+<td>b3</td>
+<td>2</td>
+</tr>
+</tbody></table>
+<p>2.自然连接R⊳⊲S 等值连接的特殊情况，A&#x3D;B属性相同，<strong>很常用</strong>连接时去除重复属性</p>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th align="center">B</th>
+<th>C</th>
+<th>E</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>a1</td>
+<td align="center">b1</td>
+<td>5</td>
+<td>3</td>
+</tr>
+<tr>
+<td>a1</td>
+<td align="center">b2</td>
+<td>6</td>
+<td>7</td>
+</tr>
+<tr>
+<td>a2</td>
+<td align="center">b3</td>
+<td>8</td>
+<td>10</td>
+</tr>
+<tr>
+<td>a2</td>
+<td align="center">b3</td>
+<td>8</td>
+<td>2</td>
+</tr>
+</tbody></table>
 
                 
               </div>
@@ -486,6 +632,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2024/05/18/Graph-DFS/" title="图(Map)的表示和图的搜索">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">图(Map)的表示和图的搜索</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
@@ -772,6 +924,13 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/yinghua.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicLine.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/metowolf/Metingjs@1.2/dist/Meting.min.js"></script>
 
 
 
