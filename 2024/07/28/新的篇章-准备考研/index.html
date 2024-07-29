@@ -16,25 +16,26 @@
   <meta name="author" content="Fireworks">
   <meta name="keywords" content="">
   
-    <meta name="description" content="快速幂算法 利用对幂次做加法分解，再相乘,得到o(long(n))的求幂算法 快速幂算法，输入参数为a^n 返回值ans初始化为1 while n不为0 （if）若每次循环n转化为二进制形式末尾为1 ans*&#x3D;a 每次循环 a*&#x3D;a 二进制n后右移一位,即除212345678910111213141516171819202122232425262728293031import">
+    <meta name="description" content="前言自从五月份最后一次更新博客后，已经摆了接近两个月了。期间虽有写一些博文，但最终都没有推送过去。这两个月被学校折腾的死去回来，又是应付期末考试，又是被迫参加意义不明的金工实习，又被学校和某些学生气的七窍生烟。终于挨到了暑假，放纵了十来天之后，突然觉得再不行动就完蛋了 选择考研的理由首先，是时候回答本科阶段的终极问题了：就业还是考研？刚入学时，我的目标很明确–梭哈JAVA，月入15K! 但现在这个">
 <meta property="og:type" content="article">
-<meta property="og:title" content="快速幂">
-<meta property="og:url" content="https://fireworks258.github.io/2024/04/16/%E5%BF%AB%E9%80%9F%E5%B9%82/index.html">
+<meta property="og:title" content="新的篇章--准备考研">
+<meta property="og:url" content="https://fireworks258.github.io/2024/07/28/%E6%96%B0%E7%9A%84%E7%AF%87%E7%AB%A0-%E5%87%86%E5%A4%87%E8%80%83%E7%A0%94/index.html">
 <meta property="og:site_name" content="fireworks">
-<meta property="og:description" content="快速幂算法 利用对幂次做加法分解，再相乘,得到o(long(n))的求幂算法 快速幂算法，输入参数为a^n 返回值ans初始化为1 while n不为0 （if）若每次循环n转化为二进制形式末尾为1 ans*&#x3D;a 每次循环 a*&#x3D;a 二进制n后右移一位,即除212345678910111213141516171819202122232425262728293031import">
+<meta property="og:description" content="前言自从五月份最后一次更新博客后，已经摆了接近两个月了。期间虽有写一些博文，但最终都没有推送过去。这两个月被学校折腾的死去回来，又是应付期末考试，又是被迫参加意义不明的金工实习，又被学校和某些学生气的七窍生烟。终于挨到了暑假，放纵了十来天之后，突然觉得再不行动就完蛋了 选择考研的理由首先，是时候回答本科阶段的终极问题了：就业还是考研？刚入学时，我的目标很明确–梭哈JAVA，月入15K! 但现在这个">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-04-16T11:40:35.000Z">
-<meta property="article:modified_time" content="2024-04-25T09:17:07.855Z">
+<meta property="og:image" content="https://bu.dusays.com/2024/07/28/66a60c21bc45f.jpg">
+<meta property="article:published_time" content="2024-07-28T08:52:48.000Z">
+<meta property="article:modified_time" content="2024-07-28T15:03:58.000Z">
 <meta property="article:author" content="Fireworks">
-<meta property="article:tag" content="Java算法">
-<meta property="article:tag" content="基础算法">
+<meta property="article:tag" content="考研">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://bu.dusays.com/2024/07/28/66a60c21bc45f.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>快速幂 - fireworks</title>
+  <title>新的篇章--准备考研 - fireworks</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -240,13 +241,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://bu.dusays.com/2024/07/17/6697840d34771.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('https://bu.dusays.com/2024/07/28/66a60c21bc45f.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="快速幂"></span>
+            <span id="subtitle" data-typed-text="新的篇章--准备考研"></span>
           
         </div>
 
@@ -257,8 +258,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-04-16 19:40" pubdate>
-          2024年4月16日 晚上
+        <time datetime="2024-07-28 16:52" pubdate>
+          2024年7月28日 下午
         </time>
       </span>
     
@@ -269,7 +270,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          258 字
+          999 字
         
       </span>
     
@@ -280,7 +281,7 @@
         
         
         
-          3 分钟
+          9 分钟
         
       </span>
     
@@ -317,22 +318,22 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">快速幂</h1>
+            <h1 id="seo-header">新的篇章--准备考研</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="快速幂算法"><a href="#快速幂算法" class="headerlink" title="快速幂算法"></a>快速幂算法</h1><ul>
-<li>利用对幂次做<strong>加法分解</strong>，再相乘,得到o(long(n))的求幂算法</li>
-<li>快速幂算法，输入参数为a^n</li>
-<li><strong>返回值ans初始化为1</strong></li>
-<li>while n不为0</li>
-<li>（if）若每次循环n转化为<strong>二进制形式末尾为1</strong></li>
-<li>ans*&#x3D;a</li>
-<li><strong>每次循环</strong></li>
-<li>a*&#x3D;a</li>
-<li>二进制n后<strong>右</strong>移一位,即除2<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Scanner;<br><span class="hljs-keyword">public</span> class 快速幂算法 &#123;<br> <span class="hljs-keyword">static</span> <span class="hljs-type">long</span> <span class="hljs-title function_">qmi</span><span class="hljs-params">(<span class="hljs-type">long</span> a,<span class="hljs-type">long</span> b)</span>&#123;<br>	    <span class="hljs-type">long</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>	    <span class="hljs-keyword">while</span>(b&gt;<span class="hljs-number">0</span>)&#123;<br>	      <span class="hljs-keyword">if</span>((b&amp;<span class="hljs-number">1</span>)&gt;<span class="hljs-number">0</span>)&#123;<br>	        res = (res*a);<br>	      &#125;<br>	      a = (a*a);<br>	      b&gt;&gt;=<span class="hljs-number">1</span>;<br>	    &#125;<br>	    <span class="hljs-keyword">return</span> res;<br>	&#125;<br>	<span class="hljs-comment">/*利用对幂次做加法分解，再相乘,得到o(long(n))的求幂算法*/</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">ksm</span><span class="hljs-params">(<span class="hljs-type">int</span> a,<span class="hljs-type">int</span> n)</span> &#123;<span class="hljs-comment">//快速幂算法，参数表示a^n</span><br>		<span class="hljs-type">int</span> ans=<span class="hljs-number">1</span>;<br>		<span class="hljs-keyword">while</span>(n&gt;<span class="hljs-number">0</span>) &#123;<br>			<span class="hljs-keyword">if</span> ((n&amp;<span class="hljs-number">1</span>)==<span class="hljs-number">1</span>) &#123;<span class="hljs-comment">//若此时的n转化为二进制后末尾为1</span><br>				ans*=a;<span class="hljs-comment">//数据过大时，可在此处取模</span><br>			&#125;<br>			a*=a;<span class="hljs-comment">//数据过大时，可在此处取模</span><br>			n&gt;&gt;=<span class="hljs-number">1</span>;<span class="hljs-comment">//转化为二进制后右移一位</span><br>		&#125;<br>		<span class="hljs-keyword">return</span> ans;<br>	&#125;<br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>		Scanner in=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br>		<span class="hljs-type">int</span> a=in.nextInt();<span class="hljs-type">int</span> b=in.nextInt();<br>		System.out.println(ksm(a, b));<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
-</ul>
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>自从五月份最后一次更新博客后，已经摆了接近两个月了。期间虽有写一些博文，但最终都没有推送过去。这两个月被学校折腾的死去回来，又是应付期末考试，又是被迫参加意义不明的金工实习，又被学校和某些学生气的七窍生烟。终于挨到了暑假，放纵了十来天之后，突然觉得再不行动就完蛋了</p>
+<h1 id="选择考研的理由"><a href="#选择考研的理由" class="headerlink" title="选择考研的理由"></a>选择考研的理由</h1><p>首先，是时候回答本科阶段的终极问题了：<strong>就业还是考研</strong>？刚入学时，我的目标很明确–梭哈JAVA，月入15K! 但现在这个梦想已经无限接近于一个笑话了，经过我这几年的耳濡目染以及最近收集到的信息，计算机行业市场早已饱和，就业环境明显供过于求，且整个行业有<strong>精英化</strong>趋势。对学历的要求已经到了一个相当变态的程度，我一个吉林省的破二本若是去求职，最大的可能是找到一个月薪四五千的非技术岗位，吃两年福报然后被迫下海黄袍加身（<del>没有看不起外卖小哥的意思</del>）所以，在地区和学历的双重debuff之下，选择考研是我的无奈之举 <del>希望学校不要再给我整花活了</del> 近期我会去积极的获取信息，制定考研目标，规划方向，所以也有了这篇文章</p>
+<h1 id="个人情况"><a href="#个人情况" class="headerlink" title="个人情况"></a>个人情况</h1><p>目前在吉林市的一所二本就读，暂时没有挂科记录，学校知名度不高，专业人数极少，教学质量参差不齐，就考研来说毫无优势，大一，大二期间有积极参加学科竞赛。战绩有工训赛的国银，机创赛的省二，B组蓝桥杯JAVA省二。四级大一裸考470，六级至今没过，高中阶段数学，英语，政治都不是强项（<del>真是天崩开局啊</del>）</p>
+<h1 id="考研方向"><a href="#考研方向" class="headerlink" title="考研方向"></a>考研方向</h1><h2 id="科目"><a href="#科目" class="headerlink" title="科目"></a>科目</h2><p>计算机一般有两个考试方向，自命题和408。许多学校的自命题相比11408会轻松很多，但是一旦落榜就很难调剂，且复试难度较大，而且好多这种学校貌似歧视双非，如大车埋土。总体风险太高，难度不低。408虽然复习难度更大，但是院校选择很多，网上资料也丰富，总体容错率高，所以我还是选择11408，也因此会早做准备。</p>
+<h2 id="志愿"><a href="#志愿" class="headerlink" title="志愿"></a>志愿</h2><p>个人倾向于考去南方的计算机一本强校或211，原因有三：杭州，南京，重庆等地区IT产业较为发达，就业情况好；北方某些院校有一些不能说的通病；最后，喜欢南方的发达地区。想去，杭州，重庆，深圳玩。</p>
+<h1 id="学习策略"><a href="#学习策略" class="headerlink" title="学习策略"></a>学习策略</h1><h2 id="政治"><a href="#政治" class="headerlink" title="政治"></a>政治</h2><p>政治课没怎么听过，对该科目了解最少，目前计划有先听<a target="_blank" rel="noopener" href="https://space.bilibili.com/41832729?spm_id_from=333.337.0.0">腿姐</a>的课</p>
+<h2 id="英语"><a href="#英语" class="headerlink" title="英语"></a>英语</h2><p>本人词汇量极低，语法也是依托。目前在用APP“不背单词”，在近期也打算找一些外刊读</p>
+<h2 id="数学（82高数-34线代-34概率）"><a href="#数学（82高数-34线代-34概率）" class="headerlink" title="数学（82高数+34线代+34概率）"></a>数学（82高数+34线代+34概率）</h2><p>数学是学习重点，我打算先跟张宇老师<del>的盗版课</del>，后期会买一些习题册做，如660。姜晓千也是一位不错的老师，如果某个知识点学不懂会去看</p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/playlist?list=PLkqMHcP63alkH174-O8dxZPaRqbvSrNIf">这里有资源</a></p>
+<h2 id="专业课"><a href="#专业课" class="headerlink" title="专业课"></a>专业课</h2><p>专业课也是学习重点，包含四门（<del>妈的</del>）计算机组成原理（45），计算机网络（25），计算机操作系统（35），数据结构（45）<br>最近打算先跟y总的数据结构课，同时学些计组<br>如果有机会的话，蓝桥杯还想再打一把，这回用C++</p>
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>文章会不断更新，有什么感想和计划都会记录在此，同时我也会从今天开始写考研日记。</p>
 
                 
               </div>
@@ -341,34 +342,11 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Java%E7%AE%97%E6%B3%95/" class="print-no-link">#Java算法</a>
-      
-        <a href="/tags/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" class="print-no-link">#基础算法</a>
+        <a href="/tags/%E8%80%83%E7%A0%94/" class="print-no-link">#考研</a>
       
     </div>
   
@@ -380,8 +358,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>快速幂</div>
-      <div>https://fireworks258.github.io/2024/04/16/快速幂/</div>
+      <div>新的篇章--准备考研</div>
+      <div>https://fireworks258.github.io/2024/07/28/新的篇章-准备考研/</div>
     </div>
     <div class="license-meta">
       
@@ -393,7 +371,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年4月16日</div>
+          <div>2024年7月28日</div>
         </div>
       
       
@@ -425,9 +403,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/04/17/%E5%AD%97%E7%AC%A6%E4%B8%B2String%E5%92%8CStringBuilder/" title="字符串String和StringBuilder">
+                      <a href="/2024/07/28/%E8%80%83%E7%A0%947-29/" title="考研7.29">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">字符串String和StringBuilder</span>
+                        <span class="hidden-mobile">考研7.29</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -435,8 +413,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/04/15/set%E9%9B%86%E5%90%88/" title="set集合">
-                        <span class="hidden-mobile">set集合</span>
+                      <a href="/2024/05/18/Graph-DFS/" title="图(Map)的表示和图的搜索">
+                        <span class="hidden-mobile">图(Map)的表示和图的搜索</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
