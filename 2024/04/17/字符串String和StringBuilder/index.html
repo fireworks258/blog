@@ -16,12 +16,12 @@
   <meta name="author" content="Fireworks">
   <meta name="keywords" content="">
   
-    <meta name="description" content="字符串类型和stringbuilder类 字符串类 String类，即字符串，java中所有字符串皆为该类对象  String类固定用final修饰，创建后不可更改！！而字符串缓冲区（StringBuffer）支持可变字符串 ！！由于String类对象都为final所以可被共享，即通过new申请内存空间后，只要字符序列（顺序和大小写）相同，无论再程序不同位置出现几次，jvm都只会建立一个">
+    <meta name="description" content="字符串类型和stringbuilder类 字符串类 String类，即字符串，java中所有字符串皆为该类对象  String类固定用final修饰，创建后不可更改！！而字符串缓冲区（StringBuffer）支持可变字符串 ！！由于String类对象都为final所以可被共享，即通过new申请内存空间后，只要字符序列（顺序和大小写）相同，无论再程序不同位置出现几次，jvm都只会建立一个Strin">
 <meta property="og:type" content="article">
 <meta property="og:title" content="字符串String和StringBuilder">
 <meta property="og:url" content="https://fireworks258.github.io/2024/04/17/%E5%AD%97%E7%AC%A6%E4%B8%B2String%E5%92%8CStringBuilder/index.html">
 <meta property="og:site_name" content="fireworks">
-<meta property="og:description" content="字符串类型和stringbuilder类 字符串类 String类，即字符串，java中所有字符串皆为该类对象  String类固定用final修饰，创建后不可更改！！而字符串缓冲区（StringBuffer）支持可变字符串 ！！由于String类对象都为final所以可被共享，即通过new申请内存空间后，只要字符序列（顺序和大小写）相同，无论再程序不同位置出现几次，jvm都只会建立一个">
+<meta property="og:description" content="字符串类型和stringbuilder类 字符串类 String类，即字符串，java中所有字符串皆为该类对象  String类固定用final修饰，创建后不可更改！！而字符串缓冲区（StringBuffer）支持可变字符串 ！！由于String类对象都为final所以可被共享，即通过new申请内存空间后，只要字符序列（顺序和大小写）相同，无论再程序不同位置出现几次，jvm都只会建立一个Strin">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-04-17T04:19:03.000Z">
 <meta property="article:modified_time" content="2024-04-25T09:17:00.390Z">
@@ -322,36 +322,36 @@
             
               <div class="markdown-body">
                 
-                <h1 id="字符串类型和stringbuilder类">字符串类型和stringbuilder类</h1>
+                <h1>字符串类型和stringbuilder类</h1>
 <h2 id="字符串类">字符串类</h2>
-<h3
-id="string类即字符串java中所有字符串皆为该类对象">String类，即字符串，java中所有字符串皆为该类对象</h3>
+<h3 id="String类，即字符串，java中所有字符串皆为该类对象">String类，即字符串，java中所有字符串皆为该类对象</h3>
 <ul>
 <li>String类固定用final修饰，<em>创建后不可更改</em>！！而字符串缓冲区（StringBuffer）支持可变字符串</li>
-<li>！！由于String类对象都为final所以可被共享，即通过new申请内存空间后，只要字符序列（顺序和大小写）相同，无论再程序不同位置出现几次，jvm都<strong>只会建立一个String对象</strong>
-创建空字符串：String snull=new String(); 参数为字符串的构造方法：String
-str=new String("value"); ### String类常用方法</li>
+<li>！！由于String类对象都为final所以可被共享，即通过new申请内存空间后，只要字符序列（顺序和大小写）相同，无论再程序不同位置出现几次，jvm都<strong>只会建立一个String对象</strong><br>
+创建空字符串：String snull=new String();<br>
+参数为字符串的构造方法：String str=new String(“value”);</li>
+</ul>
+<h3 id="String类常用方法">String类常用方法</h3>
+<ul>
 <li>char charAt(int index)返回索引位置字符</li>
 <li>int length()返回字符串长度（<em>字符个数</em>）</li>
-<li>int
-indexOf(string)返回指定子字符串<strong>第一次</strong>出现位置,<em>不存在返回-1</em></li>
-<li>String concat（String
-str）将str连接到字符串<strong>结尾</strong></li>
-<li>int compareTo(Object
-obj）<strong>重要！！以字典序进行比较，大于返回1，等于返回0，小于返回-1</strong></li>
-<li>char[]
-toCharArray()转化为字符串数组，便于操作，<strong>常用</strong> --- ##
-StringBuilder字符串构造器</li>
+<li>int indexOf(string)返回指定子字符串<strong>第一次</strong>出现位置,<em>不存在返回-1</em></li>
+<li>String concat（String str）将str连接到字符串<strong>结尾</strong></li>
+<li>int compareTo(Object obj）<strong>重要！！以字典序进行比较，大于返回1，等于返回0，小于返回-1</strong></li>
+<li>char[] toCharArray()转化为字符串数组，便于操作，<strong>常用</strong></li>
+</ul>
+<hr>
+<h2 id="StringBuilder字符串构造器">StringBuilder字符串构造器</h2>
+<ul>
 <li>常用构造方法为无参构造：StringBuilder sb=new StringBuilder()</li>
 <li>char charAt(int index)返回索引位置字符</li>
 <li>int indexOf(string)返回指定子字符串第一次出现位置,不存在返回-1</li>
-<li><strong>重点</strong>reveserse!!---StringBuilder
-reverse()<strong>返回顺序反转的StringBuilder对象</strong></li>
+<li><strong>重点</strong>reveserse!!—StringBuilder reverse()<strong>返回顺序反转的StringBuilder对象</strong></li>
 <li>boolen isEmpty()判断字符串是否为空</li>
 <li>void append(Object obj)在末尾添加字符串</li>
-<li>insert(int index, String x)在索引位置<strong>前面</strong>添加字符
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> &#123;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>	<span class="hljs-type">Scanner</span> <span class="hljs-variable">scan</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br>	String snull=<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>();<span class="hljs-comment">//创建空字符串</span><br>	String str=<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-string">&quot;value&quot;</span>);<br>	System.err.println(str.charAt(<span class="hljs-number">0</span>));<br>	System.err.println(str.indexOf(<span class="hljs-string">&quot;al&quot;</span>));<br>	str.toCharArray();<br>	StringBuilder sb=<span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>	sb.append(<span class="hljs-string">&quot;wc&quot;</span>);<br>	sb.insert(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;NB&quot;</span>);<span class="hljs-comment">//添加到索引位置前面</span><br>	System.out.println(sb.reverse());<br>	scan.close();<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li>insert(int index, String x)在索引位置<strong>前面</strong>添加字符</li>
 </ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> &#123;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>	<span class="hljs-type">Scanner</span> <span class="hljs-variable">scan</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br>	String snull=<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>();<span class="hljs-comment">//创建空字符串</span><br>	String str=<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-string">&quot;value&quot;</span>);<br>	System.err.println(str.charAt(<span class="hljs-number">0</span>));<br>	System.err.println(str.indexOf(<span class="hljs-string">&quot;al&quot;</span>));<br>	str.toCharArray();<br>	StringBuilder sb=<span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>	sb.append(<span class="hljs-string">&quot;wc&quot;</span>);<br>	sb.insert(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;NB&quot;</span>);<span class="hljs-comment">//添加到索引位置前面</span><br>	System.out.println(sb.reverse());<br>	scan.close();<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
