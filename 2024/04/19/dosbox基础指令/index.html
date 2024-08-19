@@ -16,17 +16,14 @@
   <meta name="author" content="Fireworks">
   <meta name="keywords" content="">
   
-    <meta name="description" content="初始化 将 e:\tc20 虚拟为DOSBOX仿真环境的C盘 1mount c e:\tc20 进入C盘（即 e:\tc20 ） 1c:  仿真执行DOS系统的各种操作 进入调试模式 1debug 写入指令 1a 查看寄存器内容 1r  查看内存内容 1d  查看指令栈(将机器指令翻译成汇编指令) 1u  执行（ip指向位置）指令 1t  顺序运行到程序结束 1p 退出 1q">
+    <meta name="description" content="初始化 将 e: 虚拟为DOSBOX仿真环境的C盘 1mount c e:\tc20 进入C盘（即 e: ） 1c:  仿真执行DOS系统的各种操作 #### 进入调试模式 1debug #### 写入指令 1a 查看寄存器内容 1r  #### 查看内存内容 1d  #### 查看指令栈(将机器指令翻译成汇编指令) 1u  #### 执行（ip指向位置）指令 1t  #### 顺">
 <meta property="og:type" content="article">
 <meta property="og:title" content="dosbox基础指令">
 <meta property="og:url" content="https://fireworks258.github.io/2024/04/19/dosbox%E5%9F%BA%E7%A1%80%E6%8C%87%E4%BB%A4/index.html">
 <meta property="og:site_name" content="fireworks">
-<meta property="og:description" content="初始化 将 e:\tc20 虚拟为DOSBOX仿真环境的C盘 1mount c e:\tc20 进入C盘（即 e:\tc20 ） 1c:  仿真执行DOS系统的各种操作 进入调试模式 1debug 写入指令 1a 查看寄存器内容 1r  查看内存内容 1d  查看指令栈(将机器指令翻译成汇编指令) 1u  执行（ip指向位置）指令 1t  顺序运行到程序结束 1p 退出 1q">
+<meta property="og:description" content="初始化 将 e: 虚拟为DOSBOX仿真环境的C盘 1mount c e:\tc20 进入C盘（即 e: ） 1c:  仿真执行DOS系统的各种操作 #### 进入调试模式 1debug #### 写入指令 1a 查看寄存器内容 1r  #### 查看内存内容 1d  #### 查看指令栈(将机器指令翻译成汇编指令) 1u  #### 执行（ip指向位置）指令 1t  #### 顺">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://bu.dusays.com/2024/04/19/662291d0be24f.png">
 <meta property="og:image" content="https://bu.dusays.com/2024/04/19/662291d0bf380.png">
-<meta property="og:image" content="https://bu.dusays.com/2024/04/19/662291d0c8c3a.png">
-<meta property="og:image" content="https://bu.dusays.com/2024/04/19/662291d0bedbf.png">
 <meta property="og:image" content="https://bu.dusays.com/2024/04/19/662291d0db966.png">
 <meta property="article:published_time" content="2024-04-19T08:53:27.000Z">
 <meta property="article:modified_time" content="2024-04-21T09:47:35.547Z">
@@ -34,7 +31,7 @@
 <meta property="article:tag" content="汇编">
 <meta property="article:tag" content="dosbox">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://bu.dusays.com/2024/04/19/662291d0be24f.png">
+<meta name="twitter:image" content="https://bu.dusays.com/2024/04/19/662291d0bf380.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -275,7 +272,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          97 字
+          101 字
         
       </span>
     
@@ -329,32 +326,23 @@
               <div class="markdown-body">
                 
                 <h3 id="初始化">初始化</h3>
-<p>将 e:\tc20 虚拟为DOSBOX仿真环境的C盘</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mount c e:\tc20<br></code></pre></td></tr></table></figure>
-<p>进入C盘（即 e:\tc20 ）</p>
-<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">c:</span><br></code></pre></td></tr></table></figure>
-<p><img src="https://bu.dusays.com/2024/04/19/662291d0be24f.png" srcset="/img/loading.gif" lazyload alt="20210204222449925.png"><br>
-仿真执行DOS系统的各种操作</p>
-<h4 id="进入调试模式">进入调试模式</h4>
-<figure class="highlight d"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs d"><span class="hljs-keyword">debug</span><br></code></pre></td></tr></table></figure>
-<h4 id="写入指令">写入指令</h4>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">a</span><br></code></pre></td></tr></table></figure>
+<p>将 e: 虚拟为DOSBOX仿真环境的C盘 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mount c e:\tc20<br></code></pre></td></tr></table></figure> 进入C盘（即 e: ）
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">c:</span><br></code></pre></td></tr></table></figure> <img
+src="https://bu.dusays.com/2024/04/19/662291d0be24f.png" srcset="/img/loading.gif" lazyload
+alt="20210204222449925.png" /> 仿真执行DOS系统的各种操作 ####
+进入调试模式 <figure class="highlight d"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs d"><span class="hljs-keyword">debug</span><br></code></pre></td></tr></table></figure> #### 写入指令 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">a</span><br></code></pre></td></tr></table></figure></p>
 <h4 id="查看寄存器内容">查看寄存器内容</h4>
 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">r</span><br></code></pre></td></tr></table></figure>
-<p><img src="https://bu.dusays.com/2024/04/19/662291d0bf380.png" srcset="/img/loading.gif" lazyload alt="20210204223027116.png"></p>
-<h4 id="查看内存内容">查看内存内容</h4>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">d</span><br></code></pre></td></tr></table></figure>
-<p><img src="https://bu.dusays.com/2024/04/19/662291d0c8c3a.png" srcset="/img/loading.gif" lazyload alt="20210204223301277.png"></p>
-<h4 id="查看指令栈-将机器指令翻译成汇编指令">查看指令栈(将机器指令翻译成汇编指令)</h4>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">u</span><br></code></pre></td></tr></table></figure>
-<p><img src="https://bu.dusays.com/2024/04/19/662291d0bedbf.png" srcset="/img/loading.gif" lazyload alt="20210204223934420.png"></p>
-<h4 id="执行（ip指向位置）指令">执行（ip指向位置）指令</h4>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">t</span><br></code></pre></td></tr></table></figure>
-<p><img src="https://bu.dusays.com/2024/04/19/662291d0db966.png" srcset="/img/loading.gif" lazyload alt="20210204224055955.png"></p>
-<h4 id="顺序运行到程序结束">顺序运行到程序结束</h4>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">p</span><br></code></pre></td></tr></table></figure>
-<h4 id="退出">退出</h4>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">q</span><br></code></pre></td></tr></table></figure>
+<p><img src="https://bu.dusays.com/2024/04/19/662291d0bf380.png" srcset="/img/loading.gif" lazyload
+alt="20210204223027116.png" /> #### 查看内存内容 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">d</span><br></code></pre></td></tr></table></figure> <img
+src="https://bu.dusays.com/2024/04/19/662291d0c8c3a.png" srcset="/img/loading.gif" lazyload
+alt="20210204223301277.png" /> #### 查看指令栈(将机器指令翻译成汇编指令)
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">u</span><br></code></pre></td></tr></table></figure> <img
+src="https://bu.dusays.com/2024/04/19/662291d0bedbf.png" srcset="/img/loading.gif" lazyload
+alt="20210204223934420.png" /> #### 执行（ip指向位置）指令 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">t</span><br></code></pre></td></tr></table></figure>
+<img src="https://bu.dusays.com/2024/04/19/662291d0db966.png" srcset="/img/loading.gif" lazyload
+alt="20210204224055955.png" /> #### 顺序运行到程序结束 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">p</span><br></code></pre></td></tr></table></figure>
+#### 退出 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">q</span><br></code></pre></td></tr></table></figure></p>
 
                 
               </div>

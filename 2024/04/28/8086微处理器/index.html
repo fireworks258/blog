@@ -16,12 +16,12 @@
   <meta name="author" content="Fireworks">
   <meta name="keywords" content="">
   
-    <meta name="description" content="引脚及芯片功能  以下功能遵循图片顺序介绍，自上至下，从左至右  8284A 晶振，时钟信号发生器 CLK 时钟信号，控制总线周期 RESET 冷启动引脚 ALE 地址锁存允许信号 A19-A16 地址，状态复用引脚 AD15-AD0 地址，数据复用信号 CPU 由 Intel于1978年 开发的 16 位微处理器 DEN’ 数据允许信号，控制数据收发器，低电平有效，详见数据收发器 M&#x2F;IO’ 存">
+    <meta name="description" content="引脚及芯片功能  以下功能遵循图片顺序介绍，自上至下，从左至右 * 8284A 晶振，时钟信号发生器 * CLK 时钟信号，控制总线周期 * RESET 冷启动引脚 * ALE 地址锁存允许信号 * A19-A16 地址，状态复用引脚 * AD15-AD0 地址，数据复用信号 * CPU 由 Intel于1978年 开发的 16 位微处理器 * DEN&#39; 数据允许信号，控制数据收发器">
 <meta property="og:type" content="article">
 <meta property="og:title" content="8086总线操作">
 <meta property="og:url" content="https://fireworks258.github.io/2024/04/28/8086%E5%BE%AE%E5%A4%84%E7%90%86%E5%99%A8/index.html">
 <meta property="og:site_name" content="fireworks">
-<meta property="og:description" content="引脚及芯片功能  以下功能遵循图片顺序介绍，自上至下，从左至右  8284A 晶振，时钟信号发生器 CLK 时钟信号，控制总线周期 RESET 冷启动引脚 ALE 地址锁存允许信号 A19-A16 地址，状态复用引脚 AD15-AD0 地址，数据复用信号 CPU 由 Intel于1978年 开发的 16 位微处理器 DEN’ 数据允许信号，控制数据收发器，低电平有效，详见数据收发器 M&#x2F;IO’ 存">
+<meta property="og:description" content="引脚及芯片功能  以下功能遵循图片顺序介绍，自上至下，从左至右 * 8284A 晶振，时钟信号发生器 * CLK 时钟信号，控制总线周期 * RESET 冷启动引脚 * ALE 地址锁存允许信号 * A19-A16 地址，状态复用引脚 * AD15-AD0 地址，数据复用信号 * CPU 由 Intel于1978年 开发的 16 位微处理器 * DEN&#39; 数据允许信号，控制数据收发器">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://bu.dusays.com/2024/04/29/662f781787abd.png">
 <meta property="article:published_time" content="2024-04-28T09:37:49.000Z">
@@ -271,7 +271,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          413 字
+          423 字
         
       </span>
     
@@ -325,37 +325,35 @@
               <div class="markdown-body">
                 
                 <h2 id="引脚及芯片功能">引脚及芯片功能</h2>
-<p><img src="https://bu.dusays.com/2024/04/29/662f6e90b963f.png" srcset="/img/loading.gif" lazyload alt="64003b86e138edc411c36cf3b2e40d6e.png"><br>
-以下功能遵循图片顺序介绍，自上至下，从左至右</p>
-<ul>
-<li>8284A 晶振，时钟信号发生器</li>
-<li>CLK 时钟信号，控制总线周期</li>
-<li>RESET 冷启动引脚</li>
-<li>ALE 地址锁存允许信号</li>
-<li>A19-A16 地址，状态复用引脚</li>
-<li>AD15-AD0 地址，数据复用信号</li>
-<li>CPU 由 Intel于1978年 开发的 <strong>16</strong> 位微处理器</li>
-<li>DEN’ 数据允许信号，控制数据收发器，低电平有效，详见数据收发器</li>
-<li>M/IO’ 存储器输入/IO控制信号，<strong>高</strong>电平表示CPU和存储器进行数据传输，<strong>低</strong>电平表示CPU和IO端口进行数据传输</li>
-<li>WR’ 写信号，低电平有效，具体写到哪里由M/IO’决定</li>
-<li>RD’ 读信号，低电平有效，具体读到哪里由M/IO’决定</li>
-<li>INTR 中断请求</li>
-<li>INTA’中断应答</li>
-<li>8286 地址锁存器，STB高电平IN,OUT直通，低电平地址信息<strong>锁存</strong>，不被IN改变</li>
-<li>数据收发器 小型设备可省略，AD可直连到内存储器，OE’是使能段</li>
-<li>内存储器，存储规则为十六位段基址(CS代码段,DS数据段,ES附加段,SS堆栈段)+四位偏移值(<strong>常以16进制给出</strong>) 如：DS=0703H,偏移值[0003],内存地址物理表示为：07033H （5位16进制，<strong>总共20位2进制</strong>）</li>
-<li>CS’是否使用内存储器</li>
-<li>IO接口芯片 连接外部设备(键盘，屏幕等)</li>
-</ul>
-<p><img src="https://bu.dusays.com/2024/04/29/662f781787abd.png" srcset="/img/loading.gif" lazyload alt="1d2309aa163c40e2a770d8b43e5a8626.png"></p>
+<p><img src="https://bu.dusays.com/2024/04/29/662f6e90b963f.png" srcset="/img/loading.gif" lazyload
+alt="64003b86e138edc411c36cf3b2e40d6e.png" />
+以下功能遵循图片顺序介绍，自上至下，从左至右 * 8284A
+晶振，时钟信号发生器 * CLK 时钟信号，控制总线周期 * RESET 冷启动引脚 *
+ALE 地址锁存允许信号 * A19-A16 地址，状态复用引脚 * AD15-AD0
+地址，数据复用信号 * CPU 由 Intel于1978年 开发的 <strong>16</strong>
+位微处理器 * DEN'
+数据允许信号，控制数据收发器，低电平有效，详见数据收发器 * M/IO'
+存储器输入/IO控制信号，<strong>高</strong>电平表示CPU和存储器进行数据传输，<strong>低</strong>电平表示CPU和IO端口进行数据传输
+* WR' 写信号，低电平有效，具体写到哪里由M/IO'决定 * RD'
+读信号，低电平有效，具体读到哪里由M/IO'决定 * INTR 中断请求 *
+INTA'中断应答 * 8286
+地址锁存器，STB高电平IN,OUT直通，低电平地址信息<strong>锁存</strong>，不被IN改变
+* 数据收发器 小型设备可省略，AD可直连到内存储器，OE'是使能段 *
+内存储器，存储规则为十六位段基址(CS代码段,DS数据段,ES附加段,SS堆栈段)+四位偏移值(<strong>常以16进制给出</strong>)
+如：DS=0703H,偏移值[0003],内存地址物理表示为：07033H
+（5位16进制，<strong>总共20位2进制</strong>） * CS'是否使用内存储器 *
+IO接口芯片 连接外部设备(键盘，屏幕等)</p>
+<figure>
+<img src="https://bu.dusays.com/2024/04/29/662f781787abd.png" srcset="/img/loading.gif" lazyload
+alt="1d2309aa163c40e2a770d8b43e5a8626.png" />
+<figcaption
+aria-hidden="true">1d2309aa163c40e2a770d8b43e5a8626.png</figcaption>
+</figure>
 <h2 id="总线周期">总线周期</h2>
-<p><img src="https://bu.dusays.com/2024/04/29/662f6e874db48.png" srcset="/img/loading.gif" lazyload alt="20210412120620260.png"></p>
-<ul>
-<li>T1周期 将地址通过AD，A传入地址锁存器</li>
-<li>T2周期 地址发送结束，AD发送数据</li>
-<li>T3周期 cpu发送信号将数据写入内存储器</li>
-<li>T4周期 空挡，信号复原</li>
-</ul>
+<p><img src="https://bu.dusays.com/2024/04/29/662f6e874db48.png" srcset="/img/loading.gif" lazyload
+alt="20210412120620260.png" /> * T1周期 将地址通过AD，A传入地址锁存器 *
+T2周期 地址发送结束，AD发送数据 * T3周期 cpu发送信号将数据写入内存储器 *
+T4周期 空挡，信号复原</p>
 
                 
               </div>
