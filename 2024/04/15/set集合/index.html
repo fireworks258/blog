@@ -16,12 +16,12 @@
   <meta name="author" content="Fireworks">
   <meta name="keywords" content="">
   
-    <meta name="description" content="hashset类常用方法  add(Object obj)向集合中添加元素，添加成返回true，失败（集合中已有该元素）返回false size()返回集合中元素个数 remove（Object obj）删除set集合元素，成功返回true，失败返回false contains(Object obj)查询集合中的元素，若set包含元素，返回true，否则返回false clear">
+    <meta name="description" content="hashset类常用方法  add(Object obj)向集合中添加元素，添加成返回true，失败（集合中已有该元素）返回false size()返回集合中元素个数 remove（Object obj）删除set集合元素，成功返回true，失败返回false contains(Object obj)查询集合中的元素，若set包含元素，返回true，否则返回false clear()清除集合中所有">
 <meta property="og:type" content="article">
 <meta property="og:title" content="set集合">
 <meta property="og:url" content="https://fireworks258.github.io/2024/04/15/set%E9%9B%86%E5%90%88/index.html">
 <meta property="og:site_name" content="fireworks">
-<meta property="og:description" content="hashset类常用方法  add(Object obj)向集合中添加元素，添加成返回true，失败（集合中已有该元素）返回false size()返回集合中元素个数 remove（Object obj）删除set集合元素，成功返回true，失败返回false contains(Object obj)查询集合中的元素，若set包含元素，返回true，否则返回false clear">
+<meta property="og:description" content="hashset类常用方法  add(Object obj)向集合中添加元素，添加成返回true，失败（集合中已有该元素）返回false size()返回集合中元素个数 remove（Object obj）删除set集合元素，成功返回true，失败返回false contains(Object obj)查询集合中的元素，若set包含元素，返回true，否则返回false clear()清除集合中所有">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-04-15T08:29:03.000Z">
 <meta property="article:modified_time" content="2024-07-27T16:04:25.567Z">
@@ -45,6 +45,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
 
 
 
@@ -322,19 +324,15 @@
             
               <div class="markdown-body">
                 
-                <h1 id="hashset类常用方法">hashset类常用方法</h1>
+                <h1>hashset类常用方法</h1>
 <ul>
-<li>add(Object
-obj)<strong>向集合中添加元素</strong>，添加成返回true，失败（集合中已有该元素）返回false</li>
+<li>add(Object obj)<strong>向集合中添加元素</strong>，添加成返回true，失败（集合中已有该元素）返回false</li>
 <li>size()<strong>返回集合中元素个数</strong></li>
-<li>remove（Object
-obj）<strong>删除set集合元素</strong>，成功返回true，失败返回false</li>
-<li>contains(Object
-obj)<strong>查询集合中的元素</strong>，若set包含元素，返回true，否则返回false</li>
+<li>remove（Object obj）<strong>删除set集合元素</strong>，成功返回true，失败返回false</li>
+<li>contains(Object obj)<strong>查询集合中的元素</strong>，若set包含元素，返回true，否则返回false</li>
 <li>clear()<strong>清除集合中所有元素</strong></li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.HashSet;<br><span class="hljs-keyword">import</span> java.util.Scanner;<br><span class="hljs-keyword">import</span> java.util.Set;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">___set</span>集合 &#123;<br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>		Scanner scan= <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br>		<span class="hljs-type">boolean</span> flag=<span class="hljs-literal">false</span>;<br>		Set&lt;Integer&gt; hset=<span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();<br>		flag=hset.add(<span class="hljs-number">1</span>);<br>		System.out.println(flag);<span class="hljs-comment">//add成功，返回true</span><br>		flag=hset.add(<span class="hljs-number">1</span>);<br>		System.out.println(flag);<span class="hljs-comment">//add失败，返回false</span><br>		scan.close();<br>	&#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
-
                 
               </div>
             
@@ -494,6 +492,11 @@ obj)<strong>查询集合中的元素</strong>，若set包含元素，返回true�
 
 
   
+
+
+  
+  
+
 
 
 

@@ -16,12 +16,12 @@
   <meta name="author" content="Fireworks">
   <meta name="keywords" content="">
   
-    <meta name="description" content="dfs深度优先搜索与剪枝模板 为什么要用dfs  提起dfs，最先会想到树和图的dfs，但算法中的dfs泛指一种暴力搜索的方式,即按照深度优先的次序来查找所有数据组合中符合需求的情况 与bfs（bfs先挖个坑）相比，dfs书写简单，容易理解只要你够闲的话多写亿个for循环也能搞出来，但容易爆栈，在使用时不要忘记观察数据范围，dfs大概率是过不了10的4次方以上的数据的 这里以洛谷p102">
+    <meta name="description" content="dfs深度优先搜索与剪枝模板 为什么要用dfs  提起dfs，最先会想到树和图的dfs，但算法中的dfs泛指一种暴力搜索的方式,即按照深度优先的次序来查找所有数据组合中符合需求的情况 与bfs（bfs先挖个坑）相比，dfs书写简单，容易理解只要你够闲的话多写亿个for循环也能搞出来，但容易爆栈，在使用时不要忘记观察数据范围，dfs大概率是过不了10的4次方以上的数据的 这里以洛谷p1025数的划分">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DFS">
 <meta property="og:url" content="https://fireworks258.github.io/2024/04/18/dfs/index.html">
 <meta property="og:site_name" content="fireworks">
-<meta property="og:description" content="dfs深度优先搜索与剪枝模板 为什么要用dfs  提起dfs，最先会想到树和图的dfs，但算法中的dfs泛指一种暴力搜索的方式,即按照深度优先的次序来查找所有数据组合中符合需求的情况 与bfs（bfs先挖个坑）相比，dfs书写简单，容易理解只要你够闲的话多写亿个for循环也能搞出来，但容易爆栈，在使用时不要忘记观察数据范围，dfs大概率是过不了10的4次方以上的数据的 这里以洛谷p102">
+<meta property="og:description" content="dfs深度优先搜索与剪枝模板 为什么要用dfs  提起dfs，最先会想到树和图的dfs，但算法中的dfs泛指一种暴力搜索的方式,即按照深度优先的次序来查找所有数据组合中符合需求的情况 与bfs（bfs先挖个坑）相比，dfs书写简单，容易理解只要你够闲的话多写亿个for循环也能搞出来，但容易爆栈，在使用时不要忘记观察数据范围，dfs大概率是过不了10的4次方以上的数据的 这里以洛谷p1025数的划分">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-04-18T07:16:45.000Z">
 <meta property="article:modified_time" content="2024-07-27T13:36:25.374Z">
@@ -45,6 +45,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
 
 
 
@@ -269,7 +271,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          976 字
+          1k 字
         
       </span>
     
@@ -322,56 +324,65 @@
             
               <div class="markdown-body">
                 
-                <h1 id="dfs深度优先搜索与剪枝模板">dfs深度优先搜索与剪枝模板</h1>
+                <h1>dfs深度优先搜索与剪枝模板</h1>
 <h2 id="为什么要用dfs">为什么要用dfs</h2>
 <ul>
 <li>提起dfs，最先会想到树和图的dfs，但算法中的dfs泛指一种<strong>暴力搜索</strong>的方式,即按照深度优先的次序来查找所有数据组合中符合需求的情况</li>
-<li>与bfs（bfs先挖个坑）相比，dfs书写简单，容易理解<del>只要你够闲的话多写亿个for循环也能搞出来</del>，但容易<strong>爆栈</strong>，在使用时不要忘记观察数据范围，dfs大概率是过不了10的4次方以上的数据的</li>
-<li><h2
-id="这里以洛谷p1025数的划分来举例讲解dfs">这里以洛谷p1025数的划分来举例讲解dfs</h2>
-<h1 id="noip2001-提高组-数的划分">[NOIP2001 提高组] 数的划分</h1></li>
+<li>与bfs（bfs先挖个坑）相比，dfs书写简单，容易理解<s>只要你够闲的话多写亿个for循环也能搞出来</s>，但容易<strong>爆栈</strong>，在使用时不要忘记观察数据范围，dfs大概率是过不了10的4次方以上的数据的</li>
+<li>这里以洛谷p1025数的划分来举例讲解dfs</li>
 </ul>
+<hr>
+<h1>[NOIP2001 提高组] 数的划分</h1>
 <h2 id="题目描述">题目描述</h2>
-<p>将整数 <span class="math inline">\(n\)</span> 分成 <span
-class="math inline">\(k\)</span>
-份，且每份不能为空，任意两个方案不相同（不考虑顺序）。</p>
-<p>例如：<span class="math inline">\(n=7\)</span>，<span
-class="math inline">\(k=3\)</span>，下面三种分法被认为是相同的。</p>
-<p><span class="math inline">\(1,1,5\)</span>;<br />
-<span class="math inline">\(1,5,1\)</span>;<br />
-<span class="math inline">\(5,1,1\)</span>.</p>
+<p>将整数 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> 分成 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> 份，且每份不能为空，任意两个方案不相同（不考虑顺序）。</p>
+<p>例如：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>7</mn></mrow><annotation encoding="application/x-tex">n=7</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">7</span></span></span></span>，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">k=3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">3</span></span></span></span>，下面三种分法被认为是相同的。</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo separator="true">,</mo><mn>1</mn><mo separator="true">,</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">1,1,5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">5</span></span></span></span>;<br>
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo separator="true">,</mo><mn>5</mn><mo separator="true">,</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">1,5,1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">5</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span></span></span></span>;<br>
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn><mo separator="true">,</mo><mn>1</mn><mo separator="true">,</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">5,1,1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">5</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span></span></span></span>.</p>
 <p>问有多少种不同的分法。</p>
 <h2 id="输入格式">输入格式</h2>
-<p><span class="math inline">\(n,k\)</span> （<span
-class="math inline">\(6&lt;n \le 200\)</span>，<span
-class="math inline">\(2  \le k  \le  6\)</span>）</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo separator="true">,</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">n,k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">n</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> （<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>6</mn><mo>&lt;</mo><mi>n</mi><mo>≤</mo><mn>200</mn></mrow><annotation encoding="application/x-tex">6&lt;n \le 200</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6835em;vertical-align:-0.0391em;"></span><span class="mord">6</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7719em;vertical-align:-0.136em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">200</span></span></span></span>，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>≤</mo><mi>k</mi><mo>≤</mo><mn>6</mn></mrow><annotation encoding="application/x-tex">2  \le k  \le  6</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7804em;vertical-align:-0.136em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8304em;vertical-align:-0.136em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">6</span></span></span></span>）</p>
 <h2 id="输出格式">输出格式</h2>
-<p><span class="math inline">\(1\)</span> 个整数，即不同的分法。</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> 个整数，即不同的分法。</p>
 <h2 id="样例-1">样例 #1</h2>
 <h3 id="样例输入-1">样例输入 #1</h3>
 <figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">7 </span><span class="hljs-number">3</span><br></code></pre></td></tr></table></figure>
 <h3 id="样例输出-1">样例输出 #1</h3>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">4<br></code></pre></td></tr></table></figure>
 <h2 id="提示">提示</h2>
-<p>四种分法为：<br />
-<span class="math inline">\(1,1,5\)</span>;<br />
-<span class="math inline">\(1,2,4\)</span>;<br />
-<span class="math inline">\(1,3,3\)</span>;<br />
-<span class="math inline">\(2,2,3\)</span>.</p>
+<p>四种分法为：<br>
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo separator="true">,</mo><mn>1</mn><mo separator="true">,</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">1,1,5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">5</span></span></span></span>;<br>
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo separator="true">,</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">1,2,4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">4</span></span></span></span>;<br>
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo separator="true">,</mo><mn>3</mn><mo separator="true">,</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">1,3,3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">3</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">3</span></span></span></span>;<br>
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo separator="true">,</mo><mn>2</mn><mo separator="true">,</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">2,2,3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">3</span></span></span></span>.</p>
 <p><strong>【题目来源】</strong></p>
 <p>NOIP 2001 提高组第二题</p>
-<hr />
+<hr>
 <ul>
-<li><p>这是一道经典的dfs搜索题，首先来尝试暴力写法</p></li>
-<li><p>输出为一个整数，定义ans变量记录分法</p></li>
-<li><p>首先看题目的条件，分成k个数，我们定义count变量，当count==k时，这种情况符合题意，同时，这k个数的总和要=n，我们定义sum变量，当count==k且sum==n时，ans++;</p></li>
-<li><p>为了保证所有情况不重复，循环时要令<strong>后面的数大于等于前面的数</strong>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Scanner;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> &#123;<br>	<span class="hljs-keyword">static</span> <span class="hljs-type">int</span> suml,countl;<br>	<span class="hljs-keyword">static</span> <span class="hljs-type">int</span> n,k,ans=<span class="hljs-number">0</span>;<span class="hljs-comment">//整数n,分成k份，有ans种方法</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>		Scanner scan=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br>		n=scan.nextInt();<br>		k=scan.nextInt();<br>		dfs(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>,<span class="hljs-number">0</span>);<br>		System.out.println(ans);<br>		scan.close();<br>	&#125;<br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> start ,<span class="hljs-type">int</span> sum,<span class="hljs-type">int</span> count)</span> &#123;<span class="hljs-comment">//参数：去重起始位，总和，数字个数</span><br>		<span class="hljs-keyword">if</span>(count==k) &#123;<span class="hljs-comment">//如果数字个数达到k，判断后一定要返回，不然无限循环</span><br>		<span class="hljs-keyword">if</span>(sum==n) &#123;<span class="hljs-comment">//如果相加等于n,ans+1</span><br>			ans++;<br>		&#125;<br>		<span class="hljs-keyword">return</span>;<span class="hljs-comment">//一定要有递归出口！！！！递归出口一定要写对位置！！！不然就是个爆栈！！！</span><br>		&#125;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> start; i&lt;=n; i++) &#123;<span class="hljs-comment">//去重，保证后一个数一定大于等于前一个数</span><br>			suml=sum+i;countl=count+<span class="hljs-number">1</span>;<br>			dfs(i,suml,countl);<br>			suml=sum-i;countl=count-<span class="hljs-number">1</span>;<br>		&#125;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure> | | | | | | | | ## 剪枝</p></li>
-<li><p>很显然，这种写法时间复杂度过高，无法通过所有测试用例,我们需要在for循环处做一些剪枝操作，不可能符合条件的值就不进入递归步骤</p></li>
-<li><p>在写dfs时，习惯将判断条件放在最上面，剪枝等操作在进入递归前进行（for循环只是为了优化代码，不必要可以不写），递归前后要进行状态标记和状态回退</p></li>
-<li><p>我们知道，枚举时后面的数一定大于等于前面的数，显然，当前的数i应符合这样的条件：sum+i*(k-count)&lt;=n</p></li>
-<li><p>以下是优化过的代码 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Scanner;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">p1025</span>数的划分dfs剪枝 &#123;<br>	<span class="hljs-keyword">static</span> <span class="hljs-type">int</span> n,k,ans=<span class="hljs-number">0</span>;<span class="hljs-comment">//整数n,分成k份，有ans种方法</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>		Scanner scan=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br>		n=scan.nextInt();<br>		k=scan.nextInt();<br>		dfs(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>,<span class="hljs-number">0</span>);<br>		System.out.println(ans);<br>		scan.close();<br>	&#125;<br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> start ,<span class="hljs-type">int</span> sum,<span class="hljs-type">int</span> count)</span> &#123;<span class="hljs-comment">//参数：去重起始位，总和，数字个数</span><br>		<span class="hljs-keyword">if</span>(count==k) &#123;<span class="hljs-comment">//如果数字个数达到k，判断后一定要返回，不然无限循环</span><br>		<span class="hljs-keyword">if</span>(sum==n) &#123;<span class="hljs-comment">//如果相加等于n,ans+1</span><br>			ans++;<br>		&#125;<br>		<span class="hljs-keyword">return</span>;<span class="hljs-comment">//一定要有递归出口！！！！递归出口一定要写对位置！！！不然就是个爆栈！！！</span><br>		&#125;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> start; sum+i*(k-count)&lt;=n; i++) &#123;<span class="hljs-comment">//去重，保证后一个数一定大于等于前一个数+减枝</span><br>			dfs(i,sum+i,count+<span class="hljs-number">1</span>);<span class="hljs-comment">//可以这样写，也完成了状态标记和回退操作</span><br>		&#125;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure></p></li>
+<li>这是一道经典的dfs搜索题，首先来尝试暴力写法</li>
+<li>输出为一个整数，定义ans变量记录分法</li>
+<li>首先看题目的条件，分成k个数，我们定义count变量，当count==k时，这种情况符合题意，同时，这k个数的总和要=n，我们定义sum变量，当count==k且sum==n时，ans++;</li>
+<li>为了保证所有情况不重复，循环时要令<strong>后面的数大于等于前面的数</strong></li>
 </ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Scanner;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> &#123;<br>	<span class="hljs-keyword">static</span> <span class="hljs-type">int</span> suml,countl;<br>	<span class="hljs-keyword">static</span> <span class="hljs-type">int</span> n,k,ans=<span class="hljs-number">0</span>;<span class="hljs-comment">//整数n,分成k份，有ans种方法</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>		Scanner scan=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br>		n=scan.nextInt();<br>		k=scan.nextInt();<br>		dfs(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>,<span class="hljs-number">0</span>);<br>		System.out.println(ans);<br>		scan.close();<br>	&#125;<br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> start ,<span class="hljs-type">int</span> sum,<span class="hljs-type">int</span> count)</span> &#123;<span class="hljs-comment">//参数：去重起始位，总和，数字个数</span><br>		<span class="hljs-keyword">if</span>(count==k) &#123;<span class="hljs-comment">//如果数字个数达到k，判断后一定要返回，不然无限循环</span><br>		<span class="hljs-keyword">if</span>(sum==n) &#123;<span class="hljs-comment">//如果相加等于n,ans+1</span><br>			ans++;<br>		&#125;<br>		<span class="hljs-keyword">return</span>;<span class="hljs-comment">//一定要有递归出口！！！！递归出口一定要写对位置！！！不然就是个爆栈！！！</span><br>		&#125;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> start; i&lt;=n; i++) &#123;<span class="hljs-comment">//去重，保证后一个数一定大于等于前一个数</span><br>			suml=sum+i;countl=count+<span class="hljs-number">1</span>;<br>			dfs(i,suml,countl);<br>			suml=sum-i;countl=count-<span class="hljs-number">1</span>;<br>		&#125;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>| | | |<br>
+| | | |</p>
+<h2 id="剪枝">剪枝</h2>
+<ul>
+<li>
+<p>很显然，这种写法时间复杂度过高，无法通过所有测试用例,我们需要在for循环处做一些剪枝操作，不可能符合条件的值就不进入递归步骤</p>
+</li>
+<li>
+<p>在写dfs时，习惯将判断条件放在最上面，剪枝等操作在进入递归前进行（for循环只是为了优化代码，不必要可以不写），递归前后要进行状态标记和状态回退</p>
+</li>
+<li>
+<p>我们知道，枚举时后面的数一定大于等于前面的数，显然，当前的数i应符合这样的条件：sum+i*(k-count)&lt;=n</p>
+</li>
+<li>
+<p>以下是优化过的代码</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Scanner;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">p1025</span>数的划分dfs剪枝 &#123;<br>	<span class="hljs-keyword">static</span> <span class="hljs-type">int</span> n,k,ans=<span class="hljs-number">0</span>;<span class="hljs-comment">//整数n,分成k份，有ans种方法</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>		Scanner scan=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br>		n=scan.nextInt();<br>		k=scan.nextInt();<br>		dfs(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>,<span class="hljs-number">0</span>);<br>		System.out.println(ans);<br>		scan.close();<br>	&#125;<br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> start ,<span class="hljs-type">int</span> sum,<span class="hljs-type">int</span> count)</span> &#123;<span class="hljs-comment">//参数：去重起始位，总和，数字个数</span><br>		<span class="hljs-keyword">if</span>(count==k) &#123;<span class="hljs-comment">//如果数字个数达到k，判断后一定要返回，不然无限循环</span><br>		<span class="hljs-keyword">if</span>(sum==n) &#123;<span class="hljs-comment">//如果相加等于n,ans+1</span><br>			ans++;<br>		&#125;<br>		<span class="hljs-keyword">return</span>;<span class="hljs-comment">//一定要有递归出口！！！！递归出口一定要写对位置！！！不然就是个爆栈！！！</span><br>		&#125;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> start; sum+i*(k-count)&lt;=n; i++) &#123;<span class="hljs-comment">//去重，保证后一个数一定大于等于前一个数+减枝</span><br>			dfs(i,sum+i,count+<span class="hljs-number">1</span>);<span class="hljs-comment">//可以这样写，也完成了状态标记和回退操作</span><br>		&#125;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -532,6 +543,11 @@ class="math inline">\(2  \le k  \le  6\)</span>）</p>
 
 
   
+
+
+  
+  
+
 
 
 

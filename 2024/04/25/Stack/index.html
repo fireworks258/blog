@@ -16,12 +16,12 @@
   <meta name="author" content="Fireworks">
   <meta name="keywords" content="">
   
-    <meta name="description" content="栈Stack 栈的特点：后进后先  * 初始化Stack stack&#x3D;new Stack&lt;&gt;(); * 栈的特点：先进后出 * Object push(Object obj)压栈：压入栈顶&#x2F;或add效果相同 * Object pop()弹栈：移除栈顶 * Object peek()查看栈顶，但不弹栈 * boolean isEmpty()返回：栈是否为空，用法如 123wh">
+    <meta name="description" content="栈Stack 栈的特点：后进后先   初始化Stack stack&#x3D;new Stack&lt;&gt;(); 栈的特点：先进后出 Object push(Object obj)压栈：压入栈顶&#x2F;或add效果相同 Object pop()弹栈：移除栈顶 Object peek()查看栈顶，但不弹栈 boolean isEmpty()返回：栈是否为空，用法如   123while(!stack.isEm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Stack">
 <meta property="og:url" content="https://fireworks258.github.io/2024/04/25/Stack/index.html">
 <meta property="og:site_name" content="fireworks">
-<meta property="og:description" content="栈Stack 栈的特点：后进后先  * 初始化Stack stack&#x3D;new Stack&lt;&gt;(); * 栈的特点：先进后出 * Object push(Object obj)压栈：压入栈顶&#x2F;或add效果相同 * Object pop()弹栈：移除栈顶 * Object peek()查看栈顶，但不弹栈 * boolean isEmpty()返回：栈是否为空，用法如 123wh">
+<meta property="og:description" content="栈Stack 栈的特点：后进后先   初始化Stack stack&#x3D;new Stack&lt;&gt;(); 栈的特点：先进后出 Object push(Object obj)压栈：压入栈顶&#x2F;或add效果相同 Object pop()弹栈：移除栈顶 Object peek()查看栈顶，但不弹栈 boolean isEmpty()返回：栈是否为空，用法如   123while(!stack.isEm">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://bu.dusays.com/2024/04/25/662a1aebcf2dd.jpeg">
 <meta property="article:published_time" content="2024-04-25T08:48:31.000Z">
@@ -47,6 +47,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
 
 
 
@@ -271,7 +273,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          94 字
+          93 字
         
       </span>
     
@@ -324,16 +326,19 @@
             
               <div class="markdown-body">
                 
-                <h1 id="栈stack">栈Stack</h1>
+                <h1>栈Stack</h1>
 <p>栈的特点：后进后先</p>
-<p><img src="https://bu.dusays.com/2024/04/25/662a1aebcf2dd.jpeg" srcset="/img/loading.gif" lazyload
-alt="44a4fc21bceebb16ef03f40dfd737cb2.jpeg" /> * 初始化Stack<Integer>
-stack=new Stack&lt;&gt;(); * 栈的特点：先进后出 * Object push(Object
-obj)压栈：压入栈顶/或add效果相同 * Object pop()弹栈：移除栈顶 * Object
-peek()查看栈顶，但不弹栈 * boolean
-isEmpty()返回：栈是否为空，<em>用法如</em> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">while</span>(!stack.isEmpty)&#123;<br>   <span class="hljs-keyword">do</span> some thing<br>   &#125;<br></code></pre></td></tr></table></figure></p>
+<p><img src="https://bu.dusays.com/2024/04/25/662a1aebcf2dd.jpeg" srcset="/img/loading.gif" lazyload alt="44a4fc21bceebb16ef03f40dfd737cb2.jpeg"></p>
+<ul>
+<li>初始化Stack<Integer> stack=new Stack&lt;&gt;();</li>
+<li>栈的特点：先进后出</li>
+<li>Object push(Object obj)压栈：压入栈顶/或add效果相同</li>
+<li>Object pop()弹栈：移除栈顶</li>
+<li>Object peek()查看栈顶，但不弹栈</li>
+<li>boolean isEmpty()返回：栈是否为空，<em>用法如</em></li>
+</ul>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">while</span>(!stack.isEmpty)&#123;<br>   <span class="hljs-keyword">do</span> some thing<br>   &#125;<br></code></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> &#123;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>	<span class="hljs-type">Scanner</span> <span class="hljs-variable">scan</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br>	Stack&lt;Integer&gt; stack=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Stack</span>&lt;&gt;();<br>	scan.close();<br>&#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
-
                 
               </div>
             
@@ -493,6 +498,11 @@ isEmpty()返回：栈是否为空，<em>用法如</em> <figure class="highlight 
 
 
   
+
+
+  
+  
+
 
 
 
