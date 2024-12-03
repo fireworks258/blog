@@ -16,15 +16,15 @@
   <meta name="author" content="Fireworks">
   <meta name="keywords" content="">
   
-    <meta name="description" content="STL vector, 变长数组，倍增的思想 size()  返回元素个数 empty()  返回是否为空 clear()  清空 front()&#x2F;back() push_back()&#x2F;pop_back() begin()&#x2F;end() [] 支持随机寻址 支持比较运算，按字典序 pair&lt;int, int&gt;存储二元组，前后两类型任意 支持pair&lt;int,">
+    <meta name="description" content="STL vector, 变长数组，倍增的思想 size()  返回元素个数 empty()  返回是否为空 clear()  清空 front()&#x2F;back() push_back()&#x2F;pop_back() begin()&#x2F;end() [] 支持随机寻址 支持比较运算，按字典序  pair&lt;int, int&gt;存储二元组，前后两类型任意 支持pair&lt;int,pair&lt;int">
 <meta property="og:type" content="article">
 <meta property="og:title" content="c++常用STL">
 <meta property="og:url" content="https://fireworks258.github.io/2024/11/24/c-%E5%B8%B8%E7%94%A8STL/index.html">
 <meta property="og:site_name" content="fireworks">
-<meta property="og:description" content="STL vector, 变长数组，倍增的思想 size()  返回元素个数 empty()  返回是否为空 clear()  清空 front()&#x2F;back() push_back()&#x2F;pop_back() begin()&#x2F;end() [] 支持随机寻址 支持比较运算，按字典序 pair&lt;int, int&gt;存储二元组，前后两类型任意 支持pair&lt;int,">
+<meta property="og:description" content="STL vector, 变长数组，倍增的思想 size()  返回元素个数 empty()  返回是否为空 clear()  清空 front()&#x2F;back() push_back()&#x2F;pop_back() begin()&#x2F;end() [] 支持随机寻址 支持比较运算，按字典序  pair&lt;int, int&gt;存储二元组，前后两类型任意 支持pair&lt;int,pair&lt;int">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-11-24T08:51:06.000Z">
-<meta property="article:modified_time" content="2024-11-24T09:38:46.119Z">
+<meta property="article:modified_time" content="2024-11-27T09:28:36.566Z">
 <meta property="article:author" content="Fireworks">
 <meta property="article:tag" content="基础算法，c++语法">
 <meta name="twitter:card" content="summary_large_image">
@@ -270,7 +270,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          606 字
+          647 字
         
       </span>
     
@@ -323,8 +323,8 @@
             
               <div class="markdown-body">
                 
-                <h1 id="stl">STL</h1>
-<h2 id="vector-变长数组倍增的思想">vector, 变长数组，倍增的思想</h2>
+                <h1>STL</h1>
+<h2 id="vector-变长数组，倍增的思想">vector, 变长数组，倍增的思想</h2>
 <pre><code class="hljs">size()  返回元素个数
 empty()  返回是否为空
 clear()  清空
@@ -332,42 +332,47 @@ front()/back()
 push_back()/pop_back()
 begin()/end()
 [] 支持随机寻址
-支持比较运算，按字典序</code></pre>
-<h2 id="pairint-int存储二元组前后两类型任意">pair&lt;int,
-int&gt;存储二元组，前后两类型任意</h2>
+支持比较运算，按字典序
+</code></pre>
+<h2 id="pair-int-int-存储二元组，前后两类型任意">pair&lt;int, int&gt;存储二元组，前后两类型任意</h2>
 <pre><code class="hljs">支持pair&lt;int,pair&lt;int,int&gt;&gt;;
 构造pair:make_pair(10,&quot;fireworks&quot;);
 first, 第一个元素
 second, 第二个元素
-支持比较运算，以first为第一关键字，以second为第二关键字（字典序）</code></pre>
-<h2 id="string字符串">string，字符串</h2>
+支持比较运算，以first为第一关键字，以second为第二关键字（字典序）
+</code></pre>
+<h2 id="string，字符串">string，字符串</h2>
 <pre><code class="hljs">可以用+连接
 size()/length()  返回字符串长度
 empty() 是否为空
 clear() 清空
 substr(起始下标，(子串长度))  返回子串，字串长度过长，输出到最后一个字母为止
-c_str()  返回字符串所在字符数组的起始地址</code></pre>
+c_str()  返回字符串所在字符数组的起始地址
+</code></pre>
 <h2 id="queue-队列">queue, 队列</h2>
 <pre><code class="hljs">size()
 empty()
 push()  向队尾插入一个元素
 front()  返回队头元素
 back()  返回队尾元素
-pop()  弹出队头元素</code></pre>
-<h2 id="priority_queue-优先队列默认是大根堆">priority_queue,
-优先队列，默认是大根堆</h2>
+pop()  弹出队头元素
+</code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N=<span class="hljs-number">100010</span>;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	queue&lt;<span class="hljs-type">int</span>&gt; q;<br>	q.<span class="hljs-built_in">push</span>(<span class="hljs-number">4</span>);<br>	q.<span class="hljs-built_in">push</span>(<span class="hljs-number">3</span>);<br>	q.<span class="hljs-built_in">push</span>(<span class="hljs-number">2</span>);<br>	<span class="hljs-keyword">while</span>(!q.<span class="hljs-built_in">empty</span>())&#123;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>,q.<span class="hljs-built_in">front</span>());<br>		q.<span class="hljs-built_in">pop</span>();<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="priority-queue-优先队列，默认是大根堆">priority_queue, 优先队列，默认是大根堆</h2>
 <pre><code class="hljs">size()
 empty()
 push()  插入一个元素
 top()  返回堆顶元素
 pop()  弹出堆顶元素
-定义成小根堆的方式：priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt;&gt; q;</code></pre>
+定义成小根堆的方式：priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt;&gt; q;
+</code></pre>
 <h2 id="stack-栈">stack, 栈</h2>
 <pre><code class="hljs">size()
 empty()
 push()  向栈顶插入一个元素
 top()  返回栈顶元素
-pop()  弹出栈顶元素</code></pre>
+pop()  弹出栈顶元素
+</code></pre>
 <h2 id="deque-双端队列">deque, 双端队列</h2>
 <pre><code class="hljs">size()
 empty()
@@ -376,10 +381,9 @@ front()/back()
 push_back()/pop_back()
 push_front()/pop_front()
 begin()/end()
-[]</code></pre>
-<h2
-id="set-map-multiset-multimap-基于平衡二叉树红黑树动态维护有序序列">set,
-map, multiset, multimap, 基于平衡二叉树（红黑树），动态维护有序序列</h2>
+[]
+</code></pre>
+<h2 id="set-map-multiset-multimap-基于平衡二叉树（红黑树），动态维护有序序列">set, map, multiset, multimap, 基于平衡二叉树（红黑树），动态维护有序序列</h2>
 <pre><code class="hljs">size()
 empty()
 clear()
@@ -401,12 +405,12 @@ map/multimap
     erase()  输入的参数是pair或者迭代器
     find()
     []  注意multimap不支持此操作。 时间复杂度是 O(logn)
-    lower_bound()/upper_bound()</code></pre>
-<h2
-id="unordered_set-unordered_map-unordered_multiset-unordered_multimap-哈希表">unordered_set,
-unordered_map, unordered_multiset, unordered_multimap, 哈希表</h2>
+    lower_bound()/upper_bound()
+</code></pre>
+<h2 id="unordered-set-unordered-map-unordered-multiset-unordered-multimap-哈希表">unordered_set, unordered_map, unordered_multiset, unordered_multimap, 哈希表</h2>
 <pre><code class="hljs">和上面类似，增删改查的时间复杂度是 O(1)
-不支持 lower_bound()/upper_bound()， 迭代器的++，--</code></pre>
+不支持 lower_bound()/upper_bound()， 迭代器的++，--
+</code></pre>
 <h2 id="bitset-圧位">bitset, 圧位</h2>
 <pre><code class="hljs">bitset&lt;10000&gt; s;
 ~, &amp;, |, ^
@@ -423,7 +427,8 @@ set()  把所有位置成1
 set(k, v)  将第k位变成v
 reset()  把所有位变成0
 flip()  等价于~
-flip(k) 把第k位取反</code></pre>
+flip(k) 把第k位取反
+</code></pre>
 
                 
               </div>
